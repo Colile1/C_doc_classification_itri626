@@ -40,13 +40,19 @@ that a real intake queue must reject.
 | `report/` · `slides/` | The two assessed deliverables |
 | `opus-to-fable/` | The gate checklists this project's sessions run through |
 
-## Quick start (once built)
+## Quick start
 
 ```bash
-python -m venv .venv && .venv\Scripts\activate
+# Windows: create the environment OUTSIDE the repository. The repository path
+# is deep enough that torch's own file names exceed the Windows path limit
+# inside a repository-local .venv.
+python -m venv C:\Users\<name>\venvs\itri626
+C:\Users\<name>\venvs\itri626\Scripts\activate
+
+pip install torch==2.13.0 torchvision==0.28.0 --index-url https://download.pytorch.org/whl/cpu
 pip install -r requirements.txt
 
-pytest tests/ -q
+pytest tests/ -q          # 95 tests, about 20 seconds, no dataset needed
 
 python run_prepare_data.py --config configs/smoke.yaml
 python run_split.py        --config configs/smoke.yaml

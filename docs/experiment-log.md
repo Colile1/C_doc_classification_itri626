@@ -8,6 +8,32 @@ a hyperparameter was chosen, the answer is here.
 |---|------|-------|--------|--------|-------------|-----------|-------------------|---------------|---------------|-----------|------------------|
 | | | | | | | | | | | | |
 
+## Environment, pinned 2026-08-15
+
+The report has to state the library versions, so they are recorded once
+here and repeated per run only when they change.
+
+| Library | Version |
+|---------|---------|
+| Python | 3.11.9 |
+| torch | 2.13.0 (+cpu on the laptop) |
+| torchvision | 0.28.0 |
+| timm | 1.0.28 |
+| numpy | 2.4.6 |
+| pandas | 3.0.5 |
+| scikit-learn | 1.9.0 |
+| pillow | 12.3.0 |
+| imagehash | 4.3.2 |
+| matplotlib | 3.11.1 |
+| seaborn | 0.13.2 |
+
+The full resolved environment, transitive dependencies included, is in
+`requirements.lock.txt`. Colab supplies its own torch build; record the
+version it reports at the top of each training notebook.
+
+No training runs have happened yet: the table above the fold is empty
+because the dataset is not in place. The first row is written at step 13.
+
 ## What to record beyond the table
 
 For each run, note in prose underneath:

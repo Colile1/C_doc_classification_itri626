@@ -23,3 +23,11 @@ comparison).
 Done when: all three builders return a module that accepts a
 `(batch, 3, H, W)` tensor and emits `(batch, n_classes)` logits, verified
 by a shape test that needs no data.
+
+Built at step 8. The registry holds five names across the three fixed
+families: `baseline_cnn`; `resnet50` and `mobilenetv3` (one is chosen);
+`vit_b16` and `swin_t` (one is chosen). A second variant of a family
+already present is not a fourth model, and `model_family()` states which
+family each name belongs to for the report. Every builder is exercised by
+the shape test with `train.pretrained: false`, so the suite needs no
+weight download and no network.
