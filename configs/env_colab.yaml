@@ -1,0 +1,21 @@
+# env_colab.yaml — Colab free T4: the primary trainer for all three models.
+# Author: Colile Sibanda
+#
+# Checkpoints are written to Drive so a disconnect costs one epoch, not a run.
+
+paths:
+  root: /content/itri626-doc-classification
+  raw: /content/data/raw
+  interim: /content/data/interim
+  processed: /content/data/processed
+  checkpoints: /content/drive/MyDrive/itri626/checkpoints
+
+train:
+  batch_size: 32
+  num_workers: 2
+  device: cuda
+  amp: true
+
+eval:
+  batch_size: 64
+  num_workers: 2

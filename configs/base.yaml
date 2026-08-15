@@ -1,0 +1,76 @@
+# base.yaml — settings shared by every run of the project.
+# Author: Colile Sibanda
+
+name: base
+seed: 626
+
+# Fixed by the approved brief. The loader rejects any other class set.
+classes:
+  - invoice
+  - budget
+  - form
+  - letter
+  - memo
+  - handwritten
+  - resume
+  - advertisement
+
+paths:
+  root: "."
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+  splits: data/splits
+  checkpoints: outputs/checkpoints
+  figures: outputs/figures
+  metrics: outputs/metrics
+  logs: outputs/logs
+
+data:
+  archive_name: rvl-cdip.tar.gz
+  archive_sha256: null
+  source_url: https://www.cs.cmu.edu/~aharley/rvl-cdip/
+  n_per_class: 2000          # provisional; set from the measured epoch time of the first full run
+  min_side_pixels: 64
+  hash_distance: 4
+  group_pattern: '^(?P<group>[^_]+)'
+
+split:
+  ratios: [0.70, 0.15, 0.15]
+  group_column: doc_group_id
+  stratify_column: class_name
+
+image:
+  size: 224
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+  rotation_degrees: 5.0
+  brightness: 0.15
+  contrast: 0.15
+  blur_probability: 0.20
+  crop_scale: [0.85, 1.0]
+
+train:
+  model: baseline_cnn
+  epochs: 20
+  batch_size: 32
+  num_workers: 0
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  optimiser: adamw
+  scheduler: cosine
+  early_stopping_patience: 5
+  monitor: val_macro_f1
+  class_weights: false
+  freeze_upto: null
+  pretrained: true
+  device: auto
+  amp: false
+
+eval:
+  batch_size: 32
+  num_workers: 0
+  latency_batch_size: 1
+  latency_repeats: 50
+  error_samples: 12
+  review_threshold: null

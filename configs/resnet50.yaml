@@ -1,0 +1,22 @@
+# resnet50.yaml — the transfer-learning entry (objective O4). ResNet50, or MobileNetV3 as the lighter alternative.
+# Author: Colile Sibanda
+#
+# `freeze_upto` names the last backbone stage kept frozen; everything after it
+# is fine-tuned. The choice is recorded in docs/experiment-log.md at step 14.
+
+extends: base.yaml
+
+name: resnet50
+
+train:
+  model: resnet50
+  epochs: 20
+  batch_size: 32
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  optimiser: adamw
+  scheduler: cosine
+  early_stopping_patience: 5
+  class_weights: true
+  freeze_upto: layer2
+  pretrained: true

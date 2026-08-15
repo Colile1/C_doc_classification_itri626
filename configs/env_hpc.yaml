@@ -1,0 +1,16 @@
+# env_hpc.yaml — the school GPU: escalation only, with code already proven on Colab.
+# Author: Colile Sibanda
+
+paths:
+  root: "."
+  raw: data/raw
+
+train:
+  batch_size: 64
+  num_workers: 4
+  device: cuda
+  amp: true
+
+eval:
+  batch_size: 128
+  num_workers: 4

@@ -1,0 +1,22 @@
+# vit_b16.yaml — the transformer entry (objective O5). ViT-B/16, or Swin-T as the fallback.
+# Author: Colile Sibanda
+#
+# If ViT-B/16 will not fit the Colab session budget, switch `model` to
+# swin_t; nothing else in this file changes.
+
+extends: base.yaml
+
+name: vit_b16
+
+train:
+  model: vit_b16
+  epochs: 15
+  batch_size: 16
+  learning_rate: 0.00003
+  weight_decay: 0.05
+  optimiser: adamw
+  scheduler: cosine
+  early_stopping_patience: 4
+  class_weights: true
+  pretrained: true
+  amp: true

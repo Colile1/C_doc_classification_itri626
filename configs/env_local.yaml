@@ -1,0 +1,15 @@
+# env_local.yaml — the laptop: no CUDA, smoke subset only, never a full run.
+# Author: Colile Sibanda
+
+paths:
+  root: "."
+
+train:
+  batch_size: 8
+  num_workers: 0
+  device: cpu
+  amp: false
+
+eval:
+  batch_size: 8
+  num_workers: 0

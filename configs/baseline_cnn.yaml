@@ -1,0 +1,18 @@
+# baseline_cnn.yaml — the from-scratch convolutional baseline (objective O3).
+# Author: Colile Sibanda
+
+extends: base.yaml
+
+name: baseline_cnn
+
+train:
+  model: baseline_cnn
+  epochs: 25
+  batch_size: 64
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  optimiser: adamw
+  scheduler: cosine
+  early_stopping_patience: 5
+  class_weights: true
+  pretrained: false

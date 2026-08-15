@@ -1,0 +1,26 @@
+# smoke.yaml — the whole pipeline on 25 images per class, for the laptop.
+# Author: Colile Sibanda
+
+extends: base.yaml
+
+name: smoke
+seed: 626
+
+data:
+  n_per_class: 25
+
+image:
+  size: 64
+
+train:
+  model: baseline_cnn
+  epochs: 2
+  batch_size: 8
+  num_workers: 0
+  early_stopping_patience: 2
+  pretrained: false
+
+eval:
+  batch_size: 8
+  latency_repeats: 5
+  error_samples: 4
