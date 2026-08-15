@@ -1,0 +1,42 @@
+# ITRI626 document image classification
+# Pinned against the laptop environment. The exact resolved
+# environment, including transitive dependencies, is in requirements.lock.txt.
+#
+# On the laptop (no CUDA) install torch from the CPU index first, otherwise pip
+# pulls the multi-gigabyte CUDA build:
+#   pip install torch==2.13.0 torchvision==0.28.0 \
+#       --index-url https://download.pytorch.org/whl/cpu
+# On Colab, torch and torchvision are already present; install the rest only.
+#
+# Windows note: create the virtual environment outside the repository (for
+# example C:\Users\<name>\venvs\itri626). The repository path is deep enough
+# that torch's own file names exceed the Windows path limit inside `.venv`.
+
+# Core
+torch==2.13.0
+torchvision==0.28.0
+timm==1.0.28
+
+# Data
+numpy==2.4.6
+pandas==3.0.5
+pillow==12.3.0
+imagehash==4.3.2
+pyyaml==6.0.3
+
+# Evaluation and figures
+scikit-learn==1.9.0
+matplotlib==3.11.1
+seaborn==0.13.2
+
+# Notebooks — jupyterlab and notebook are deliberately not pinned here; the
+# notebooks are run from VS Code or Colab, and JupyterLab's extension files
+# also break the Windows path limit inside a repository-local environment.
+ipykernel==7.3.0
+nbformat==5.11.0
+nbclient==0.11.0
+nbconvert==7.17.1
+tqdm==4.70.0
+
+# Tests
+pytest==9.1.1
