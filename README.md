@@ -38,7 +38,6 @@ that a real intake queue must reject.
 | `data/` | Manifests and split files are committed; images are not |
 | `outputs/` | Metrics, figures, logs and checkpoints from runs |
 | `report/` · `slides/` | The two assessed deliverables |
-| `opus-to-fable/` | The gate checklists this project's sessions run through |
 
 ## Quick start
 
