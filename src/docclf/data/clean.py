@@ -6,12 +6,14 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+import numpy as np
 import pandas as pd
 
-from docclf.utils.hashing import hamming_distance, perceptual_hash
+from docclf.utils.hashing import distances_to, hashes_to_array, perceptual_hash
 from docclf.utils.logging import get_logger
 
 _LOGGER = get_logger(__name__)
+_PROGRESS_EVERY = 10_000
 
 REASON_CORRUPT = "corrupt_file"
 REASON_TOO_SMALL = "below_size_floor"
@@ -76,8 +78,13 @@ def clean_manifest(df: pd.DataFrame, cfg: Any) -> tuple[pd.DataFrame, CleaningRe
     report = CleaningReport(raw_count=len(df))
     keep_index: list[int] = []
     hashes: dict[int, str] = {}
-    kept_by_class: dict[str, list[int]] = {}
-    for index, row in df.iterrows():
+    kept_by_class: dict[str, _KeptHashes] = {}
+    for position, (index, row) in enumerate(df.iterrows(), start=1):
+        if position % _PROGRESS_EVERY == 0:
+            _LOGGER.info(
+                "Cleaning progress: %d of %d checked, %d kept",
+                position, len(df), len(keep_index),
+            )
         if not bool(row.get("readable", True)):
             report.record(row, REASON_CORRUPT, "Pillow could not open the file")
             continue
@@ -91,15 +98,14 @@ def clean_manifest(df: pd.DataFrame, cfg: Any) -> tuple[pd.DataFrame, CleaningRe
         except (ValueError, FileNotFoundError) as error:
             report.record(row, REASON_CORRUPT, str(error).split(":")[0])
             continue
-        duplicate_of = _find_duplicate(
-            digest, kept_by_class.get(row["class_name"], []), hashes, cfg.data.hash_distance
-        )
+        kept = kept_by_class.setdefault(row["class_name"], _KeptHashes())
+        duplicate_of = kept.find_duplicate(digest, cfg.data.hash_distance)
         if duplicate_of is not None:
             report.record(row, REASON_DUPLICATE, f"duplicate of {df.at[duplicate_of, 'path']}")
             continue
         hashes[index] = digest
         keep_index.append(index)
-        kept_by_class.setdefault(row["class_name"], []).append(index)
+        kept.add(index, digest)
     cleaned = df.loc[keep_index].copy()
     cleaned["phash"] = [hashes[index] for index in keep_index]
     cleaned = cleaned.reset_index(drop=True)
@@ -107,19 +113,35 @@ def clean_manifest(df: pd.DataFrame, cfg: Any) -> tuple[pd.DataFrame, CleaningRe
     return cleaned, report
 
 
-def _find_duplicate(
-    digest: str, candidates: list[int], hashes: dict[int, str], max_distance: int
-) -> int | None:
-    """Purpose: find an already-kept page this one duplicates.
+class _KeptHashes:
+    """The pages kept so far in one class, packed for a one-pass distance check.
 
-    Inputs: the candidate hash, the indices already kept for the class, the hash
-    table, and the maximum Hamming distance that still counts as a duplicate.
-    Output: the index duplicated, or None.
+    Comparing a page against every kept page one pair at a time is quadratic in
+    Python calls and does not finish at 25 000 pages per class. Holding the
+    hashes as a uint64 array turns each check into a single vectorised XOR and
+    bit count, with the same result: the earliest kept page within the distance.
     """
-    for index in candidates:
-        if hamming_distance(digest, hashes[index]) <= max_distance:
-            return index
-    return None
+
+    def __init__(self) -> None:
+        self._indices: list[int] = []
+        self._packed = np.empty(1024, dtype=np.uint64)
+
+    def find_duplicate(self, digest: str, max_distance: int) -> int | None:
+        """Return the index of the first kept page within max_distance, or None."""
+        count = len(self._indices)
+        if count == 0:
+            return None
+        target = int(hashes_to_array([digest])[0])
+        close = np.flatnonzero(distances_to(target, self._packed[:count]) <= max_distance)
+        return self._indices[int(close[0])] if close.size else None
+
+    def add(self, index: int, digest: str) -> None:
+        """Record a kept page, growing the packed array when it is full."""
+        count = len(self._indices)
+        if count == len(self._packed):
+            self._packed = np.resize(self._packed, count * 2)
+        self._packed[count] = hashes_to_array([digest])[0]
+        self._indices.append(index)
 
 
 def _log_summary(report: CleaningReport) -> None:

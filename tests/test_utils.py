@@ -1,17 +1,25 @@
-# test_utils.py — device selection, logging discipline and perceptual hashing.
+# test_utils.py — device selection, logging discipline, perceptual hashing and I/O retry.
 # Author: Colile Sibanda
 
 from __future__ import annotations
 
+import errno
+import random
 from pathlib import Path
 
 import pytest
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 
 from docclf.config.loader import load_config
 from docclf.utils.env import detect_environment, select_device
-from docclf.utils.hashing import hamming_distance, perceptual_hash
+from docclf.utils.hashing import (
+    distances_to,
+    hamming_distance,
+    hashes_to_array,
+    perceptual_hash,
+)
 from docclf.utils.logging import get_logger
+from docclf.utils.retry import is_transient_io_error, retry_io
 from docclf.utils.timing import timed
 
 CONFIGS = Path(__file__).resolve().parents[1] / "configs"
@@ -72,6 +80,61 @@ def test_hashing_a_non_image_is_an_actionable_error(tmp_path: Path) -> None:
     broken.write_bytes(b"this is not an image")
     with pytest.raises(ValueError, match="not a readable image"):
         perceptual_hash(broken)
+
+
+def test_packed_distances_match_pairwise_hamming() -> None:
+    """The vectorised check must give exactly the distances the pairwise one does."""
+    rng = random.Random(626)
+    hashes = [f"{rng.getrandbits(64):016x}" for _ in range(200)]
+    hashes.append(hashes[0])
+    packed = hashes_to_array(hashes)
+    for target in hashes[:20]:
+        expected = [hamming_distance(target, other) for other in hashes]
+        assert distances_to(int(target, 16), packed).tolist() == expected
+
+
+def test_packing_rejects_a_hash_of_the_wrong_width() -> None:
+    """A short hash would compare wrongly against 64-bit ones, so it must be refused."""
+    with pytest.raises(ValueError, match="hexadecimal digits"):
+        hashes_to_array(["abc"])
+
+
+def test_retry_rides_out_a_brief_storage_fault() -> None:
+    """A drive that drops out and comes back must not be reported as a bad file."""
+    calls = {"count": 0}
+
+    def flaky() -> str:
+        calls["count"] += 1
+        if calls["count"] < 3:
+            error = OSError(errno.EIO, "I/O error")
+            raise error
+        return "read"
+
+    assert retry_io(flaky, attempts=5, wait_seconds=0) == "read"
+    assert calls["count"] == 3
+
+
+def test_retry_raises_a_persistent_storage_fault() -> None:
+    """A drive that stays gone must stop the run, not mark files corrupt."""
+    def gone() -> None:
+        raise OSError(errno.ENODEV, "No such device")
+
+    with pytest.raises(OSError):
+        retry_io(gone, attempts=3, wait_seconds=0)
+
+
+def test_retry_does_not_retry_a_bad_file() -> None:
+    """An unreadable image is a property of the file; retrying would only waste time."""
+    calls = {"count": 0}
+
+    def unreadable() -> None:
+        calls["count"] += 1
+        raise UnidentifiedImageError("cannot identify image file")
+
+    assert not is_transient_io_error(UnidentifiedImageError("x"))
+    with pytest.raises(UnidentifiedImageError):
+        retry_io(unreadable, attempts=5, wait_seconds=0)
+    assert calls["count"] == 1
 
 
 def test_timed_records_a_duration() -> None:

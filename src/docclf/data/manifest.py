@@ -11,8 +11,10 @@ import pandas as pd
 from PIL import Image, UnidentifiedImageError
 
 from docclf.utils.logging import get_logger
+from docclf.utils.retry import is_transient_io_error, retry_io
 
 _LOGGER = get_logger(__name__)
+_PROGRESS_EVERY = 10_000
 
 MANIFEST_COLUMNS = (
     "path",
@@ -60,6 +62,8 @@ def build_manifest(
             rows.append(
                 _describe_image(path, class_dir, class_name, class_id, group_pattern)
             )
+            if len(rows) % _PROGRESS_EVERY == 0:
+                _LOGGER.info("Manifest progress: %d images described", len(rows))
     frame = pd.DataFrame(rows, columns=list(MANIFEST_COLUMNS))
     _LOGGER.info("Manifest rows: %d", len(frame))
     _LOGGER.info("Manifest classes: %d", frame["class_name"].nunique())
@@ -75,10 +79,16 @@ def _describe_image(
     Output: a dictionary keyed by MANIFEST_COLUMNS.
     """
     width, height, readable = 0, 0, True
-    try:
+
+    def read_size() -> tuple[int, int]:
         with Image.open(path) as image:
-            width, height = image.size
-    except (UnidentifiedImageError, OSError, ValueError):
+            return image.size
+
+    try:
+        width, height = retry_io(read_size)
+    except (UnidentifiedImageError, OSError, ValueError) as error:
+        if is_transient_io_error(error):
+            raise
         readable = False
     return {
         "path": str(path),
@@ -87,7 +97,7 @@ def _describe_image(
         "doc_group_id": derive_group_id(path, class_dir, group_pattern),
         "width": width,
         "height": height,
-        "bytes": path.stat().st_size,
+        "bytes": retry_io(lambda: path.stat().st_size),
         "readable": readable,
     }
 
