@@ -6,6 +6,12 @@ extends: base.yaml
 name: smoke
 seed: 626
 
+# Cleaning reads and hashes every raw image before the cap, so the smoke run
+# gets its own small raw set (200 per class), built with
+#   python extract_rvl_cdip.py --source <extraction> --per-class 200 --dest data/interim/smoke_raw
+paths:
+  raw: data/interim/smoke_raw
+
 data:
   n_per_class: 25
 
