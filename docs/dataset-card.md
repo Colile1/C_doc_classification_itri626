@@ -12,7 +12,7 @@ four of the twenty report marks.
 | Access link | https://huggingface.co/datasets/aharley/rvl_cdip |
 | Original paper | Harley, Ufkes & Derpanis, 2015, ICDAR |
 | Size | 400 000 grayscale document images across 16 classes |
-| Licence and usage conditions | **TO CONFIRM BEFORE USE** — derived from a public litigation archive; record the exact terms here and cite them in the report |
+| Licence and usage conditions | Confirmed 2026-09-27. HF licence tag: `other` (no standard SPDX licence). RVL-CDIP is a subset of IIT-CDIP, drawn from the Legacy Tobacco Document Library (Industry Documents Library, UCSF). Per the archive's copyright page (https://www.industrydocuments.ucsf.edu/help/copyright/, retrieved 2026-09-27): the archive is made available under court-approved agreements/legal precedent; underlying rights may still be held by the original document creators; use is governed by US fair use (17 U.S.C. §107), which explicitly names teaching, scholarship and research as qualifying purposes; each user is responsible for their own compliance and the university disclaims liability beyond fair use. **Verdict: permitted for this academic/coursework use** (non-commercial, educational, research) under fair use, citing the dataset authors (Harley, Ufkes & Derpanis, 2015) and the archive. No redistribution of the raw archive; only derived results/sample figures go in the report per the Ethics section below. |
 | Secondary source (reserve) | Tobacco3482, same archive, used only if time allows |
 
 ## Classes used
