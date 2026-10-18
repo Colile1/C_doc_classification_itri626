@@ -26,7 +26,7 @@ Done when: a two-epoch run on the smoke subset produces a history with
 monotonically recorded epochs, a checkpoint on disk, and no reference to
 the test loader anywhere in the module.
 
-Built at step 9. The loop reads two loader keys, `train` and `val`, and
+The loop reads two loader keys, `train` and `val`, and
 they are declared as constants at the top of `trainer.py` so the claim can
 be checked mechanically. Validation macro-F1 is computed here with
 scikit-learn rather than imported from `evaluation`, because the

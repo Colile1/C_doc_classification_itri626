@@ -32,7 +32,7 @@ The full resolved environment, transitive dependencies included, is in
 version it reports at the top of each training notebook.
 
 No training runs have happened yet: the table above the fold is empty
-because the dataset is not in place. The first row is written at step 13.
+because the dataset is not in place. The first row is the baseline CNN's full run.
 
 ## What to record beyond the table
 

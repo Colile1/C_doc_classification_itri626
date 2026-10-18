@@ -29,7 +29,8 @@ that a real intake queue must reject.
 
 | Path | Purpose |
 |------|---------|
-| `docs/` | Dataset card, experiment log |
+| `docs/` | Compute plan, dataset card, experiment log |
+| `ui/` | Local status dashboard: `python ui/server.py`, then open http://127.0.0.1:8626 |
 | `configs/` | One YAML per run; environment files are the only thing that differs per machine |
 | `src/docclf/` | The library — see the module READMEs |
 | `run_*.py` | Thin orchestrators, the only entry points |
@@ -74,8 +75,8 @@ reproduction instructions.
 ## Where things run
 
 The laptop authors code, prepares data and evaluates; Colab's T4 trains
-all three models; the school GPU is escalation only. The reasoning, the
-per-epoch estimates and the fallback plan are in `docs/compute-plan.md`.
+all three models; the school GPU is escalation only. The hardware and
+library versions behind every run are recorded in `docs/experiment-log.md`.
 
 ## Reproducibility contract
 
@@ -83,4 +84,4 @@ Every result is reproducible from three things: the config file, the
 pinned `requirements.txt`, and the commit hash — all of which each run
 records into `outputs/logs/`. One global seed drives every source of
 randomness, and the split files in `data/splits/` are committed so that a
-marker recreates the exact experiment rather than a similar one.
+reader recreates the exact experiment rather than a similar one.

@@ -2,7 +2,7 @@
 # Author: Colile Sibanda
 #
 # `freeze_upto` names the last backbone stage kept frozen; everything after it
-# is fine-tuned. The choice is recorded in docs/experiment-log.md at step 14.
+# is fine-tuned. The choice is recorded in docs/experiment-log.md.
 
 extends: base.yaml
 

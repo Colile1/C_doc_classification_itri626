@@ -25,7 +25,7 @@ weights are unavailable.
 Done when: a config with an unknown key is rejected by name, and two runs
 with the same seed produce byte-identical split files.
 
-Built at step 2. `load_config` gained the `env` argument so that one call
+`load_config` takes the `env` argument so that one call
 loads the run config and the machine overlay together; `resolve_paths`
 then only has to turn the merged names into absolute paths. `seed.py`
 imports torch lazily, so a config load still works where torch is absent.

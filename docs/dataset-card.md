@@ -1,8 +1,8 @@
 # Dataset card
 
-Filled in at build steps 4 and 5. Every field here is required by the
-module specification under dataset documentation, and together they carry
-four of the twenty report marks.
+Every field here is required by the module specification under dataset
+documentation: source, licence, class definitions, and counts before
+and after cleaning.
 
 ## Source
 

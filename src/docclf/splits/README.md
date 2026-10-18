@@ -26,7 +26,7 @@ Done when: `pytest tests/test_leakage.py` passes, including a
 deliberately poisoned fixture that the check must reject, and
 `describe_splits` totals equal the working-set count exactly.
 
-Built at step 6, tests written first. Twelve tests pass, including the
+The tests were written before the code. Twelve tests pass, including the
 poisoned fixture, the planted cross-split near-duplicate, reproducibility
 from the seed, and the CSV round trip. The assignment places whole groups
 largest-first into the split with the largest remaining page deficit, per
