@@ -101,7 +101,7 @@ def context(dataset: Path):
     """Purpose: a smoke config and paths rooted in the temporary dataset."""
     cfg = load_config(CONFIGS / "smoke.yaml", env="local")
     cfg = dataclasses.replace(
-        cfg, paths=dataclasses.replace(cfg.paths, root=str(dataset))
+        cfg, paths=dataclasses.replace(cfg.paths, root=str(dataset), raw="data/raw")
     )
     set_global_seed(cfg.seed)
     return cfg, resolve_paths(cfg, "local").ensure()
@@ -134,6 +134,19 @@ def test_whole_pipeline_runs_end_to_end(context) -> None:
     assert (paths.metrics / "comparison.csv").is_file()
     assert (paths.figures / f"confusion_{cfg.train.model}.png").is_file()
     assert (paths.figures / f"curves_{cfg.train.model}.png").is_file()
+
+
+def test_recapping_reuses_the_cleaned_manifest(context) -> None:
+    """A new per-class cap must not re-read the images, and must cap the same pages."""
+    cfg, paths = context
+    prepare = load_orchestrator("run_prepare_data").prepare_data
+    first = pd.read_csv(prepare(cfg, paths))
+    smaller = dataclasses.replace(cfg, data=dataclasses.replace(cfg.data, n_per_class=4))
+    for image in (paths.raw).rglob("*.png"):
+        image.unlink()
+    recapped = pd.read_csv(prepare(smaller, paths, reuse_cleaned=True))
+    assert len(recapped) == 8 * 4
+    assert set(recapped["path"]) <= set(first["path"])
 
 
 def test_evaluation_uses_only_the_held_out_split(context) -> None:
