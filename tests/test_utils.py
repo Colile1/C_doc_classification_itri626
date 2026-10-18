@@ -123,6 +123,15 @@ def test_retry_raises_a_persistent_storage_fault() -> None:
         retry_io(gone, attempts=3, wait_seconds=0)
 
 
+def test_a_vanished_folder_counts_as_a_storage_fault(tmp_path: Path) -> None:
+    """A dropped drive reports "path not found"; that must not read as a missing image."""
+    gone = tmp_path / "unplugged" / "page.tif"
+    present = tmp_path / "page.tif"
+    error = FileNotFoundError(2, "The system cannot find the path specified")
+    assert is_transient_io_error(error, gone)
+    assert not is_transient_io_error(error, present)
+
+
 def test_retry_does_not_retry_a_bad_file() -> None:
     """An unreadable image is a property of the file; retrying would only waste time."""
     calls = {"count": 0}

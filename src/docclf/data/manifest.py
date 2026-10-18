@@ -85,9 +85,9 @@ def _describe_image(
             return image.size
 
     try:
-        width, height = retry_io(read_size)
+        width, height = retry_io(read_size, path=path)
     except (UnidentifiedImageError, OSError, ValueError) as error:
-        if is_transient_io_error(error):
+        if is_transient_io_error(error, path):
             raise
         readable = False
     return {
@@ -97,7 +97,7 @@ def _describe_image(
         "doc_group_id": derive_group_id(path, class_dir, group_pattern),
         "width": width,
         "height": height,
-        "bytes": retry_io(lambda: path.stat().st_size),
+        "bytes": retry_io(lambda: path.stat().st_size, path=path),
         "readable": readable,
     }
 

@@ -29,12 +29,12 @@ def perceptual_hash(path: str | Path) -> str:
             return str(imagehash.phash(image.convert("L"), hash_size=HASH_SIZE))
 
     try:
-        return retry_io(compute)
-    except FileNotFoundError:
-        raise FileNotFoundError(f"Image not found: {file_path}.") from None
+        return retry_io(compute, path=file_path)
     except (UnidentifiedImageError, OSError) as error:
-        if is_transient_io_error(error):
+        if is_transient_io_error(error, file_path):
             raise
+        if isinstance(error, FileNotFoundError):
+            raise FileNotFoundError(f"Image not found: {file_path}.") from None
         raise ValueError(
             f"Cannot hash {file_path}: the file is not a readable image ({error}). "
             f"Remove it in data.clean and record the removal in the cleaning report."
