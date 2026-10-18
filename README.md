@@ -29,8 +29,7 @@ that a real intake queue must reject.
 
 | Path | Purpose |
 |------|---------|
-| `docs/` | Compute plan, dataset card, experiment log |
-| `ui/` | Local status dashboard: `python ui/server.py`, then open http://127.0.0.1:8626 |
+| `docs/` | Dataset card, experiment log |
 | `configs/` | One YAML per run; environment files are the only thing that differs per machine |
 | `src/docclf/` | The library — see the module READMEs |
 | `run_*.py` | Thin orchestrators, the only entry points |
