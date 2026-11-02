@@ -1,0 +1,121 @@
+2026-10-24 19:59:46,182 | INFO    | docclf.run_train | Config: configs/vit_b16.yaml
+2026-10-24 19:59:46,184 | INFO    | docclf.run_train | Environment: colab
+2026-10-24 19:59:46,184 | INFO    | docclf.run_train | Seed: 626
+2026-10-24 19:59:46,184 | INFO    | docclf.run_train | Project root: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification
+2026-10-24 19:59:46,185 | INFO    | docclf.run_train | Initial checkpoint: none; random initialization
+2026-10-24 19:59:46,185 | INFO    | docclf.run_train | Run started UTC: 2026-10-24T19:59:46.182594+00:00
+2026-10-24 19:59:46,437 | INFO    | docclf.splits.io | Split rows loaded: 16000
+2026-10-24 19:59:46,439 | INFO    | docclf.utils.timing | Split file loading duration seconds: 0.253
+2026-10-24 19:59:46,453 | INFO    | docclf.splits.leakage | Group overlap check: passed on 16000 groups
+2026-10-24 19:59:46,453 | INFO    | docclf.utils.timing | Split leakage verification duration seconds: 0.014
+2026-10-24 19:59:46,462 | INFO    | docclf.data.loaders | Loader train pages: 11200
+2026-10-24 19:59:46,463 | INFO    | docclf.data.loaders | Loader val pages: 2400
+2026-10-24 19:59:46,464 | INFO    | docclf.data.loaders | Loader test pages: 2400
+2026-10-24 19:59:46,464 | INFO    | docclf.utils.timing | Data loader construction duration seconds: 0.011
+2026-10-24 19:59:52,297 | INFO    | docclf.models.transformer | Transformer backbone: vit_base_patch16_224
+2026-10-24 19:59:52,297 | INFO    | docclf.models.transformer | Pretrained weights loaded: True
+2026-10-24 19:59:52,298 | INFO    | docclf.utils.timing | Model construction duration seconds: 5.833
+2026-10-24 19:59:52,332 | INFO    | docclf.run_train | Model: vit_b16
+2026-10-24 19:59:52,333 | INFO    | docclf.run_train | Initial checkpoint: none; random initialization
+2026-10-24 19:59:52,333 | INFO    | docclf.run_train | Family: Pretrained transformer
+2026-10-24 19:59:52,333 | INFO    | docclf.run_train | Device: cuda
+2026-10-24 19:59:52,334 | INFO    | docclf.run_train | Total parameters: 85804808
+2026-10-24 19:59:52,334 | INFO    | docclf.run_train | Trainable parameters: 85804808
+2026-10-24 19:59:52,334 | INFO    | docclf.run_train | Model size MB: 327.319
+2026-10-24 19:59:52,334 | INFO    | docclf.run_train | Epochs: 15
+2026-10-24 19:59:52,335 | INFO    | docclf.run_train | Batch size: 32
+2026-10-24 19:59:52,335 | INFO    | docclf.run_train | Validation batch size: 64
+2026-10-24 19:59:52,335 | INFO    | docclf.run_train | Training workers: 2
+2026-10-24 19:59:52,335 | INFO    | docclf.run_train | Validation workers: 2
+2026-10-24 19:59:52,336 | INFO    | docclf.run_train | Learning rate: 3e-05
+2026-10-24 19:59:52,336 | INFO    | docclf.run_train | Weight decay: 0.05
+2026-10-24 19:59:52,336 | INFO    | docclf.run_train | Optimiser: adamw
+2026-10-24 19:59:52,336 | INFO    | docclf.run_train | Scheduler: cosine
+2026-10-24 19:59:52,336 | INFO    | docclf.run_train | Image size: 224
+2026-10-24 19:59:52,337 | INFO    | docclf.run_train | Mixed precision: True
+2026-10-24 19:59:52,337 | INFO    | docclf.run_train | Class weighting: True
+2026-10-24 19:59:52,337 | INFO    | docclf.run_train | Train examples: 11200
+2026-10-24 19:59:52,337 | INFO    | docclf.run_train | Validation examples: 2400
+2026-10-24 19:59:52,338 | INFO    | docclf.run_train | Test examples (not read by trainer): 2400
+2026-10-24 19:59:52,338 | INFO    | docclf.run_train | Split count test: 2400
+2026-10-24 19:59:52,338 | INFO    | docclf.run_train | Split count train: 11200
+2026-10-24 19:59:52,338 | INFO    | docclf.run_train | Split count val: 2400
+2026-10-24 19:59:52,338 | INFO    | docclf.run_train | Class count test/advertisement: 300
+2026-10-24 19:59:52,338 | INFO    | docclf.run_train | Class count test/budget: 300
+2026-10-24 19:59:52,339 | INFO    | docclf.run_train | Class count test/form: 300
+2026-10-24 19:59:52,339 | INFO    | docclf.run_train | Class count test/handwritten: 300
+2026-10-24 19:59:52,339 | INFO    | docclf.run_train | Class count test/invoice: 300
+2026-10-24 19:59:52,339 | INFO    | docclf.run_train | Class count test/letter: 300
+2026-10-24 19:59:52,339 | INFO    | docclf.run_train | Class count test/memo: 300
+2026-10-24 19:59:52,340 | INFO    | docclf.run_train | Class count test/resume: 300
+2026-10-24 19:59:52,340 | INFO    | docclf.run_train | Class count train/advertisement: 1400
+2026-10-24 19:59:52,340 | INFO    | docclf.run_train | Class count train/budget: 1400
+2026-10-24 19:59:52,340 | INFO    | docclf.run_train | Class count train/form: 1400
+2026-10-24 19:59:52,340 | INFO    | docclf.run_train | Class count train/handwritten: 1400
+2026-10-24 19:59:52,341 | INFO    | docclf.run_train | Class count train/invoice: 1400
+2026-10-24 19:59:52,341 | INFO    | docclf.run_train | Class count train/letter: 1400
+2026-10-24 19:59:52,341 | INFO    | docclf.run_train | Class count train/memo: 1400
+2026-10-24 19:59:52,341 | INFO    | docclf.run_train | Class count train/resume: 1400
+2026-10-24 19:59:52,341 | INFO    | docclf.run_train | Class count val/advertisement: 300
+2026-10-24 19:59:52,342 | INFO    | docclf.run_train | Class count val/budget: 300
+2026-10-24 19:59:52,342 | INFO    | docclf.run_train | Class count val/form: 300
+2026-10-24 19:59:52,342 | INFO    | docclf.run_train | Class count val/handwritten: 300
+2026-10-24 19:59:52,342 | INFO    | docclf.run_train | Class count val/invoice: 300
+2026-10-24 19:59:52,342 | INFO    | docclf.run_train | Class count val/letter: 300
+2026-10-24 19:59:52,343 | INFO    | docclf.run_train | Class count val/memo: 300
+2026-10-24 19:59:52,343 | INFO    | docclf.run_train | Class count val/resume: 300
+2026-10-24 19:59:52,343 | INFO    | docclf.run_train | Python version: 3.13.16
+2026-10-24 19:59:52,343 | INFO    | docclf.run_train | PyTorch version: 2.11.0+cu130
+2026-10-24 19:59:52,343 | INFO    | docclf.run_train | Pandas version: 2.2.3
+2026-10-24 19:59:52,344 | INFO    | docclf.run_train | Logical CPU cores: 2
+2026-10-24 19:59:52,344 | INFO    | docclf.run_train | CUDA available: True
+2026-10-24 19:59:52,344 | INFO    | docclf.run_train | CUDA device: Tesla T4
+2026-10-24 19:59:52,344 | INFO    | docclf.run_train | Class weight invoice: 1.0
+2026-10-24 19:59:52,345 | INFO    | docclf.run_train | Class weight budget: 1.0
+2026-10-24 19:59:52,345 | INFO    | docclf.run_train | Class weight form: 1.0
+2026-10-24 19:59:52,345 | INFO    | docclf.run_train | Class weight letter: 1.0
+2026-10-24 19:59:52,345 | INFO    | docclf.run_train | Class weight memo: 1.0
+2026-10-24 19:59:52,346 | INFO    | docclf.run_train | Class weight handwritten: 1.0
+2026-10-24 19:59:52,346 | INFO    | docclf.run_train | Class weight resume: 1.0
+2026-10-24 19:59:52,346 | INFO    | docclf.run_train | Class weight advertisement: 1.0
+2026-10-24 19:59:52,662 | INFO    | docclf.training.trainer | Training loader: 11200 examples, 350 batches, batch size 32, workers 2
+2026-10-24 19:59:52,663 | INFO    | docclf.training.trainer | Validation loader: 2400 examples, 38 batches, batch size 64, workers 2
+2026-10-24 20:02:14,934 | INFO    | docclf.training.trainer | Epoch 1: train loss 0.9610 | val loss 0.6280 | val accuracy 0.7846 | val macro-F1 0.7847 | train seconds 112.2 (99.8 images/s) | val seconds 30.1 (79.8 images/s) | total seconds 142.3 | lr 3e-05
+2026-10-24 20:02:28,002 | INFO    | docclf.training.callbacks | Best checkpoint written: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints/vit_b16_best.pt
+2026-10-24 20:05:11,588 | INFO    | docclf.training.trainer | Epoch 2: train loss 0.5456 | val loss 0.4630 | val accuracy 0.8442 | val macro-F1 0.8444 | train seconds 129.5 (86.5 images/s) | val seconds 33.2 (72.3 images/s) | total seconds 162.7 | lr 2.967221e-05
+2026-10-24 20:05:23,865 | INFO    | docclf.training.callbacks | Best checkpoint written: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints/vit_b16_best.pt
+2026-10-24 20:08:38,791 | INFO    | docclf.training.trainer | Epoch 3: train loss 0.4187 | val loss 0.5286 | val accuracy 0.8379 | val macro-F1 0.8365 | train seconds 144.6 (77.5 images/s) | val seconds 50.4 (47.7 images/s) | total seconds 194.9 | lr 2.870318e-05
+2026-10-24 20:11:36,426 | INFO    | docclf.training.trainer | Epoch 4: train loss 0.3226 | val loss 0.4611 | val accuracy 0.8571 | val macro-F1 0.8575 | train seconds 136.7 (81.9 images/s) | val seconds 32.9 (72.9 images/s) | total seconds 169.6 | lr 2.713525e-05
+2026-10-24 20:11:45,511 | INFO    | docclf.training.callbacks | Best checkpoint written: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints/vit_b16_best.pt
+2026-10-24 20:15:04,705 | INFO    | docclf.training.trainer | Epoch 5: train loss 0.2404 | val loss 0.4825 | val accuracy 0.8579 | val macro-F1 0.8579 | train seconds 153.0 (73.2 images/s) | val seconds 45.5 (52.8 images/s) | total seconds 198.5 | lr 2.503696e-05
+2026-10-24 20:15:17,834 | INFO    | docclf.training.callbacks | Best checkpoint written: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints/vit_b16_best.pt
+2026-10-24 20:18:38,937 | INFO    | docclf.training.trainer | Epoch 6: train loss 0.1913 | val loss 0.5612 | val accuracy 0.8479 | val macro-F1 0.8493 | train seconds 144.3 (77.6 images/s) | val seconds 56.8 (42.2 images/s) | total seconds 201.1 | lr 2.25e-05
+2026-10-24 20:21:32,624 | INFO    | docclf.training.trainer | Epoch 7: train loss 0.1369 | val loss 0.5501 | val accuracy 0.8575 | val macro-F1 0.8569 | train seconds 136.9 (81.8 images/s) | val seconds 32.8 (73.2 images/s) | total seconds 169.7 | lr 1.963525e-05
+2026-10-24 20:24:30,815 | INFO    | docclf.training.trainer | Epoch 8: train loss 0.0913 | val loss 0.5881 | val accuracy 0.8583 | val macro-F1 0.8600 | train seconds 140.5 (79.7 images/s) | val seconds 33.0 (72.7 images/s) | total seconds 173.6 | lr 1.656793e-05
+2026-10-24 20:24:39,208 | INFO    | docclf.training.callbacks | Best checkpoint written: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints/vit_b16_best.pt
+2026-10-24 20:27:52,071 | INFO    | docclf.training.trainer | Epoch 9: train loss 0.0640 | val loss 0.6293 | val accuracy 0.8596 | val macro-F1 0.8605 | train seconds 138.4 (81.0 images/s) | val seconds 54.5 (44.0 images/s) | total seconds 192.9 | lr 1.343207e-05
+2026-10-24 20:28:02,976 | INFO    | docclf.training.callbacks | Best checkpoint written: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints/vit_b16_best.pt
+2026-10-24 20:31:22,650 | INFO    | docclf.training.trainer | Epoch 10: train loss 0.0421 | val loss 0.6089 | val accuracy 0.8696 | val macro-F1 0.8705 | train seconds 141.4 (79.2 images/s) | val seconds 58.3 (41.2 images/s) | total seconds 199.7 | lr 1.036475e-05
+2026-10-24 20:31:32,595 | INFO    | docclf.training.callbacks | Best checkpoint written: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints/vit_b16_best.pt
+2026-10-24 20:34:55,433 | INFO    | docclf.training.trainer | Epoch 11: train loss 0.0301 | val loss 0.5823 | val accuracy 0.8758 | val macro-F1 0.8761 | train seconds 143.8 (77.9 images/s) | val seconds 59.1 (40.6 images/s) | total seconds 202.8 | lr 7.5e-06
+2026-10-24 20:35:05,317 | INFO    | docclf.training.callbacks | Best checkpoint written: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints/vit_b16_best.pt
+2026-10-24 20:38:31,239 | INFO    | docclf.training.trainer | Epoch 12: train loss 0.0174 | val loss 0.5700 | val accuracy 0.8767 | val macro-F1 0.8765 | train seconds 151.0 (74.2 images/s) | val seconds 54.9 (43.7 images/s) | total seconds 205.9 | lr 4.963041e-06
+2026-10-24 20:38:41,167 | INFO    | docclf.training.callbacks | Best checkpoint written: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints/vit_b16_best.pt
+2026-10-24 20:42:08,714 | INFO    | docclf.training.trainer | Epoch 13: train loss 0.0115 | val loss 0.5834 | val accuracy 0.8812 | val macro-F1 0.8815 | train seconds 147.5 (76.0 images/s) | val seconds 60.1 (40.0 images/s) | total seconds 207.5 | lr 2.864745e-06
+2026-10-24 20:42:18,675 | INFO    | docclf.training.callbacks | Best checkpoint written: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints/vit_b16_best.pt
+2026-10-24 20:45:42,300 | INFO    | docclf.training.trainer | Epoch 14: train loss 0.0087 | val loss 0.5842 | val accuracy 0.8817 | val macro-F1 0.8820 | train seconds 149.7 (74.8 images/s) | val seconds 53.9 (44.5 images/s) | total seconds 203.6 | lr 1.296818e-06
+2026-10-24 20:45:50,941 | INFO    | docclf.training.callbacks | Best checkpoint written: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints/vit_b16_best.pt
+2026-10-24 20:49:13,377 | INFO    | docclf.training.trainer | Epoch 15: train loss 0.0074 | val loss 0.5827 | val accuracy 0.8804 | val macro-F1 0.8808 | train seconds 148.0 (75.7 images/s) | val seconds 54.4 (44.1 images/s) | total seconds 202.4 | lr 3.27786e-07
+2026-10-24 20:49:17,638 | INFO    | docclf.utils.timing | Training vit_b16 duration seconds: 2965.292
+2026-10-24 20:49:17,649 | INFO    | docclf.run_train | Epochs run: 15
+2026-10-24 20:49:17,649 | INFO    | docclf.run_train | Best epoch: 14
+2026-10-24 20:49:17,649 | INFO    | docclf.run_train | Best validation macro-F1: 0.88204
+2026-10-24 20:49:17,650 | INFO    | docclf.run_train | Best validation accuracy: 0.881667
+2026-10-24 20:49:17,651 | INFO    | docclf.run_train | Mean seconds per epoch: 188.47
+2026-10-24 20:49:17,651 | INFO    | docclf.run_train | Mean training images per second: 79.78
+2026-10-24 20:49:17,652 | INFO    | docclf.run_train | Training seconds: 2965.292
+2026-10-24 20:49:17,653 | INFO    | docclf.run_train | Total run seconds: 2971.464
+2026-10-24 20:49:17,653 | INFO    | docclf.run_train | Early stopped: False
+2026-10-24 20:49:17,654 | INFO    | docclf.run_train | History: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/metrics/history_vit_b16.csv
+2026-10-24 20:49:17,654 | INFO    | docclf.run_train | Checkpoints: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/checkpoints
+2026-10-24 20:49:18,416 | INFO    | docclf.run_train | Run summary JSON: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/metrics/run_summary_vit_b16_20261024T195946Z.json

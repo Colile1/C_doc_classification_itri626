@@ -1,0 +1,2 @@
+model_name,device,batch_size,repeats,median_ms_per_image,p90_ms_per_image,total_parameters,size_mb
+baseline_cnn_v4,cuda,64,50,1.5,,1175272,4.491

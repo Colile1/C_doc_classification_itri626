@@ -1,0 +1,13 @@
+path,true_class,predicted_class,confidence
+/content/data/raw/handwritten/wgz70d00_517753852+-3854.tif,handwritten,advertisement,0.999999
+/content/data/raw/form/vhw21f00_0001456787.tif,form,budget,0.999999
+/content/data/raw/form/mmk68c00_92038905_8907.tif,form,budget,0.999993
+/content/data/raw/budget/nrp98e00_2023856185.tif,budget,form,0.999992
+/content/data/raw/invoice/fuw70f00_0011929898.tif,invoice,budget,0.99999
+/content/data/raw/invoice/cvk00a00_60018773.tif,invoice,letter,0.999965
+/content/data/raw/handwritten/taf41d00_516818315+-8317.tif,handwritten,letter,0.999965
+/content/data/raw/letter/vln83c00_2044934932_4934.tif,letter,handwritten,0.999956
+/content/data/raw/invoice/ffi62d00_83871298.tif,invoice,letter,0.999953
+/content/data/raw/memo/cbm76e00_2050047970.tif,memo,handwritten,0.999948
+/content/data/raw/budget/jan58c00_82895173.tif,budget,form,0.999932
+/content/data/raw/letter/xcx33c00_99396791_6792.tif,letter,resume,0.999922

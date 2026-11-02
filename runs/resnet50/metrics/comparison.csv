@@ -1,0 +1,2 @@
+model,n_samples,accuracy,macro_precision,macro_recall,macro_f1,weighted_precision,weighted_recall,weighted_f1,family,median_ms_per_image,total_parameters,size_mb,device
+resnet50,2400,0.8742,0.8743,0.8742,0.8736,0.8743,0.8742,0.8736,Pretrained convolutional,3.2602,23524424,89.942,cuda

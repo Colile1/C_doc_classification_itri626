@@ -1,0 +1,9 @@
+class_name,best_model,best_f1,runner_up,runner_up_f1,margin,models_compared
+advertisement,resnet50,0.9289,vit_b16,0.9269,0.002,3
+budget,vit_b16,0.8571,resnet50,0.8228,0.0343,3
+form,vit_b16,0.7907,resnet50,0.7801,0.0106,3
+handwritten,resnet50,0.9279,vit_b16,0.9201,0.0078,3
+invoice,vit_b16,0.8677,resnet50,0.8419,0.0258,3
+letter,resnet50,0.8762,vit_b16,0.872,0.0042,3
+memo,resnet50,0.8866,vit_b16,0.875,0.0116,3
+resume,vit_b16,0.9532,baseline_cnn_v4,0.9386,0.0146,3

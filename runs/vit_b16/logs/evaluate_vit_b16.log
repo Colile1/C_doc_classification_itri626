@@ -1,0 +1,35 @@
+2026-10-24 20:49:40,425 | INFO    | docclf.run_evaluate | Config: configs/vit_b16.yaml
+2026-10-24 20:49:40,426 | INFO    | docclf.run_evaluate | Environment: colab
+2026-10-24 20:49:40,716 | INFO    | docclf.splits.io | Split rows loaded: 16000
+2026-10-24 20:49:40,742 | INFO    | docclf.splits.leakage | Group overlap check: passed on 16000 groups
+2026-10-24 20:49:40,754 | INFO    | docclf.data.loaders | Loader train pages: 11200
+2026-10-24 20:49:40,755 | INFO    | docclf.data.loaders | Loader val pages: 2400
+2026-10-24 20:49:40,756 | INFO    | docclf.data.loaders | Loader test pages: 2400
+2026-10-24 20:49:43,987 | INFO    | docclf.models.transformer | Transformer backbone: vit_base_patch16_224
+2026-10-24 20:49:43,988 | INFO    | docclf.models.transformer | Pretrained weights loaded: True
+2026-10-24 20:50:32,460 | INFO    | docclf.utils.timing | Evaluating vit_b16 duration seconds: 46.324
+2026-10-24 20:51:28,212 | INFO    | docclf.run_evaluate | Model: vit_b16
+2026-10-24 20:51:28,212 | INFO    | docclf.run_evaluate | Checkpoint epoch: 14
+2026-10-24 20:51:28,213 | INFO    | docclf.run_evaluate | Held-out pages: 2400
+2026-10-24 20:51:28,214 | INFO    | docclf.run_evaluate | Accuracy: 0.8829
+2026-10-24 20:51:28,214 | INFO    | docclf.run_evaluate | Macro-F1: 0.8828
+2026-10-24 20:51:28,215 | INFO    | docclf.run_evaluate | Weighted F1: 0.8828
+2026-10-24 20:51:28,215 | INFO    | docclf.run_evaluate | Median ms per image: 13.3666
+2026-10-24 20:51:28,215 | INFO    | docclf.run_evaluate | Model size MB: 327.319
+2026-10-24 20:51:28,216 | INFO    | docclf.run_evaluate | Metrics: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/metrics/metrics_vit_b16.csv
+2026-10-24 20:51:28,216 | INFO    | docclf.run_evaluate | Per-class metrics: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/metrics/per_class_vit_b16.csv
+2026-10-24 20:51:28,216 | INFO    | docclf.run_evaluate | Predictions: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/metrics/predictions_vit_b16.csv
+2026-10-24 20:51:28,216 | INFO    | docclf.run_evaluate | Efficiency: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/metrics/efficiency_vit_b16.csv
+2026-10-24 20:51:28,216 | INFO    | docclf.run_evaluate | Error table: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/metrics/errors_vit_b16.csv
+2026-10-24 20:51:28,217 | INFO    | docclf.run_evaluate | Confusion figure: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/figures/confusion_vit_b16.png
+2026-10-24 20:51:28,217 | INFO    | docclf.run_evaluate | Normalised confusion figure: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/figures/confusion_normalised_vit_b16.png
+2026-10-24 20:51:28,217 | INFO    | docclf.run_evaluate | Error figure: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/figures/errors_vit_b16.png
+2026-10-24 20:51:28,218 | INFO    | docclf.run_evaluate | Learning curves: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/figures/curves_vit_b16.png
+2026-10-24 20:51:28,234 | INFO    | docclf.run_evaluate | Most confused: budget read as form, 20 page(s), 6.7% of the class
+2026-10-24 20:51:28,234 | INFO    | docclf.run_evaluate | Most confused: invoice read as form, 18 page(s), 6.0% of the class
+2026-10-24 20:51:28,234 | INFO    | docclf.run_evaluate | Most confused: memo read as letter, 15 page(s), 5.0% of the class
+2026-10-24 20:51:28,235 | INFO    | docclf.run_evaluate | Most confused: form read as invoice, 14 page(s), 4.7% of the class
+2026-10-24 20:51:28,235 | INFO    | docclf.run_evaluate | Most confused: form read as budget, 13 page(s), 4.3% of the class
+2026-10-24 20:51:28,259 | INFO    | docclf.run_evaluate | Comparison table: /content/drive/MyDrive/Colab Notebooks/colab-626-doc-classification/runs/vit_b16/metrics/comparison.csv
+2026-10-24 20:51:28,260 | INFO    | docclf.run_evaluate | Comparison rows: 1
+2026-10-24 20:51:28,261 | INFO    | docclf.run_evaluate | Recommended model: vit_b16 (macro-F1 0.8828, accuracy 0.8829, 13.4 ms per image)

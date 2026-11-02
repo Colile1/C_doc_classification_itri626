@@ -1,0 +1,2 @@
+model,n_samples,accuracy,macro_precision,macro_recall,macro_f1,weighted_precision,weighted_recall,weighted_f1,family,median_ms_per_image,total_parameters,size_mb,device
+baseline_cnn_v4,2400,0.8313,0.8336,0.8313,0.8308,0.8336,0.8313,0.8308,CNN from scratch,1.5408,1175272,4.491,cuda

@@ -1,0 +1,2 @@
+model_name,device,batch_size,repeats,median_ms_per_image,p90_ms_per_image,total_parameters,size_mb
+vit_b16,cuda,64,50,13.3666,13.9964,85804808,327.319

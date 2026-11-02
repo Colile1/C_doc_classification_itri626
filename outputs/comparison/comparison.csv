@@ -1,0 +1,4 @@
+model,family,n_samples,accuracy,macro_precision,macro_recall,macro_f1,weighted_precision,weighted_recall,weighted_f1,median_ms_per_image,p90_ms_per_image,total_parameters,size_mb,device
+vit_b16,Pretrained transformer,2400,0.8829,0.8834,0.8829,0.8828,0.8834,0.8829,0.8828,13.3666,13.9964,85804808,327.319,cuda
+resnet50,Pretrained convolutional,2400,0.8742,0.8743,0.8742,0.8736,0.8743,0.8742,0.8736,3.2602,3.3459,23524424,89.942,cuda
+baseline_cnn_v4,CNN from scratch,2400,0.8313,0.8336,0.8313,0.8308,0.8336,0.8313,0.8308,1.5,,1175272,4.491,cuda

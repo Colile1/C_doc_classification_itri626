@@ -1,0 +1,2 @@
+model_name,device,batch_size,repeats,median_ms_per_image,p90_ms_per_image,total_parameters,size_mb
+resnet50,cuda,64,50,3.2602,3.3459,23524424,89.942

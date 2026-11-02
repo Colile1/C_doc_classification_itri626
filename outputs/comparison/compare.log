@@ -1,0 +1,161 @@
+2026-10-24 16:06:26,829 | WARNING | docclf.run_compare | No held-out metrics for baseline_cnn, resnet50, vit_b16; the comparison covers baseline_cnn_v2 only.
+2026-10-24 16:06:29,859 | INFO    | docclf.run_compare | Which model wins each class:
+2026-10-24 16:06:29,861 | INFO    | docclf.run_compare |   advertisement  baseline_cnn_v2  F1 0.8967 (margin  over nothing)
+2026-10-24 16:06:29,862 | INFO    | docclf.run_compare |   budget         baseline_cnn_v2  F1 0.7805 (margin  over nothing)
+2026-10-24 16:06:29,863 | INFO    | docclf.run_compare |   form           baseline_cnn_v2  F1 0.7014 (margin  over nothing)
+2026-10-24 16:06:29,864 | INFO    | docclf.run_compare |   handwritten    baseline_cnn_v2  F1 0.8805 (margin  over nothing)
+2026-10-24 16:06:29,864 | INFO    | docclf.run_compare |   invoice        baseline_cnn_v2  F1 0.7713 (margin  over nothing)
+2026-10-24 16:06:29,865 | INFO    | docclf.run_compare |   letter         baseline_cnn_v2  F1 0.8368 (margin  over nothing)
+2026-10-24 16:06:29,866 | INFO    | docclf.run_compare |   memo           baseline_cnn_v2  F1 0.8448 (margin  over nothing)
+2026-10-24 16:06:29,866 | INFO    | docclf.run_compare |   resume         baseline_cnn_v2  F1 0.9502 (margin  over nothing)
+2026-10-24 16:06:31,068 | INFO    | docclf.run_compare | Models compared: baseline_cnn_v2
+2026-10-24 16:06:31,068 | INFO    | docclf.run_compare | Families represented: 1
+2026-10-24 16:06:31,068 | INFO    | docclf.run_compare | Best macro-F1: 0.8328 (baseline_cnn_v2)
+2026-10-24 16:06:31,070 | INFO    | docclf.run_compare | Files written: 8
+2026-10-24 16:06:31,070 | INFO    | docclf.run_compare | Wrote outputs\comparison\comparison.csv
+2026-10-24 16:06:31,070 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\metric_comparison.png
+2026-10-24 16:06:31,070 | INFO    | docclf.run_compare | Wrote outputs\comparison\per_class_all_models.csv
+2026-10-24 16:06:31,072 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\per_class_comparison.png
+2026-10-24 16:06:31,072 | INFO    | docclf.run_compare | Wrote outputs\comparison\class_strengths.csv
+2026-10-24 16:06:31,072 | INFO    | docclf.run_compare | Wrote outputs\comparison\history_all_models.csv
+2026-10-24 16:06:31,072 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\history_comparison.png
+2026-10-24 16:06:31,072 | INFO    | docclf.run_compare | Wrote outputs\comparison\errors_all_models.csv
+2026-10-24 16:17:20,944 | WARNING | docclf.run_compare | No held-out metrics for resnet50, vit_b16; the comparison covers baseline_cnn, baseline_cnn_v2 only.
+2026-10-24 16:17:23,891 | INFO    | docclf.run_compare | Which model wins each class:
+2026-10-24 16:17:23,893 | INFO    | docclf.run_compare |   advertisement  baseline_cnn     F1 0.9010 (margin 0.0043 over baseline_cnn_v2)
+2026-10-24 16:17:23,893 | INFO    | docclf.run_compare |   budget         baseline_cnn_v2  F1 0.7805 (margin 0.0206 over baseline_cnn)
+2026-10-24 16:17:23,893 | INFO    | docclf.run_compare |   form           baseline_cnn_v2  F1 0.7014 (margin 0.0035 over baseline_cnn)
+2026-10-24 16:17:23,895 | INFO    | docclf.run_compare |   handwritten    baseline_cnn     F1 0.9091 (margin 0.0286 over baseline_cnn_v2)
+2026-10-24 16:17:23,895 | INFO    | docclf.run_compare |   invoice        baseline_cnn_v2  F1 0.7713 (margin 0.0026 over baseline_cnn)
+2026-10-24 16:17:23,897 | INFO    | docclf.run_compare |   letter         baseline_cnn_v2  F1 0.8368 (margin 0.0169 over baseline_cnn)
+2026-10-24 16:17:23,897 | INFO    | docclf.run_compare |   memo           baseline_cnn_v2  F1 0.8448 (margin 0.0196 over baseline_cnn)
+2026-10-24 16:17:23,897 | INFO    | docclf.run_compare |   resume         baseline_cnn_v2  F1 0.9502 (margin 0.0131 over baseline_cnn)
+2026-10-24 16:17:25,193 | INFO    | docclf.run_compare | Models compared: baseline_cnn_v2, baseline_cnn
+2026-10-24 16:17:25,193 | INFO    | docclf.run_compare | Families represented: 1
+2026-10-24 16:17:25,193 | INFO    | docclf.run_compare | Best macro-F1: 0.8328 (baseline_cnn_v2)
+2026-10-24 16:17:25,193 | INFO    | docclf.run_compare | Files written: 8
+2026-10-24 16:17:25,193 | INFO    | docclf.run_compare | Recommendation: Recommended model: baseline_cnn_v2 (macro-F1 0.8328, accuracy 0.8337)
+2026-10-24 16:17:25,195 | INFO    | docclf.run_compare | Wrote outputs\comparison\comparison.csv
+2026-10-24 16:17:25,195 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\metric_comparison.png
+2026-10-24 16:17:25,195 | INFO    | docclf.run_compare | Wrote outputs\comparison\per_class_all_models.csv
+2026-10-24 16:17:25,197 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\per_class_comparison.png
+2026-10-24 16:17:25,197 | INFO    | docclf.run_compare | Wrote outputs\comparison\class_strengths.csv
+2026-10-24 16:17:25,197 | INFO    | docclf.run_compare | Wrote outputs\comparison\history_all_models.csv
+2026-10-24 16:17:25,197 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\history_comparison.png
+2026-10-24 16:17:25,197 | INFO    | docclf.run_compare | Wrote outputs\comparison\errors_all_models.csv
+2026-10-24 16:18:08,612 | WARNING | docclf.run_compare | No held-out metrics for resnet50, vit_b16; the comparison covers baseline_cnn, baseline_cnn_v2 only.
+2026-10-24 16:18:10,312 | INFO    | docclf.run_compare | Which model wins each class:
+2026-10-24 16:18:10,312 | INFO    | docclf.run_compare |   advertisement  baseline_cnn     F1 0.9010 (margin 0.0043 over baseline_cnn_v2)
+2026-10-24 16:18:10,312 | INFO    | docclf.run_compare |   budget         baseline_cnn_v2  F1 0.7805 (margin 0.0206 over baseline_cnn)
+2026-10-24 16:18:10,312 | INFO    | docclf.run_compare |   form           baseline_cnn_v2  F1 0.7014 (margin 0.0035 over baseline_cnn)
+2026-10-24 16:18:10,312 | INFO    | docclf.run_compare |   handwritten    baseline_cnn     F1 0.9091 (margin 0.0286 over baseline_cnn_v2)
+2026-10-24 16:18:10,312 | INFO    | docclf.run_compare |   invoice        baseline_cnn_v2  F1 0.7713 (margin 0.0026 over baseline_cnn)
+2026-10-24 16:18:10,312 | INFO    | docclf.run_compare |   letter         baseline_cnn_v2  F1 0.8368 (margin 0.0169 over baseline_cnn)
+2026-10-24 16:18:10,312 | INFO    | docclf.run_compare |   memo           baseline_cnn_v2  F1 0.8448 (margin 0.0196 over baseline_cnn)
+2026-10-24 16:18:10,312 | INFO    | docclf.run_compare |   resume         baseline_cnn_v2  F1 0.9502 (margin 0.0131 over baseline_cnn)
+2026-10-24 16:18:10,966 | INFO    | docclf.run_compare | Models compared: baseline_cnn_v2, baseline_cnn
+2026-10-24 16:18:10,966 | INFO    | docclf.run_compare | Families represented: 1
+2026-10-24 16:18:10,966 | INFO    | docclf.run_compare | Best macro-F1: 0.8328 (baseline_cnn_v2)
+2026-10-24 16:18:10,969 | INFO    | docclf.run_compare | Files written: 9
+2026-10-24 16:18:10,969 | INFO    | docclf.run_compare | Recommendation: Recommended model: baseline_cnn_v2 (macro-F1 0.8328, accuracy 0.8337, 9.7 ms per image)
+2026-10-24 16:18:10,969 | INFO    | docclf.run_compare | Wrote outputs\comparison\comparison.csv
+2026-10-24 16:18:10,969 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\accuracy_against_cost.png
+2026-10-24 16:18:10,971 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\metric_comparison.png
+2026-10-24 16:18:10,971 | INFO    | docclf.run_compare | Wrote outputs\comparison\per_class_all_models.csv
+2026-10-24 16:18:10,971 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\per_class_comparison.png
+2026-10-24 16:18:10,971 | INFO    | docclf.run_compare | Wrote outputs\comparison\class_strengths.csv
+2026-10-24 16:18:10,971 | INFO    | docclf.run_compare | Wrote outputs\comparison\history_all_models.csv
+2026-10-24 16:18:10,971 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\history_comparison.png
+2026-10-24 16:18:10,971 | INFO    | docclf.run_compare | Wrote outputs\comparison\errors_all_models.csv
+2026-10-25 10:59:15,052 | WARNING | docclf.run_compare | No held-out metrics for vit_b16; the comparison covers baseline_cnn_v4, resnet50 only.
+2026-10-25 10:59:21,140 | INFO    | docclf.run_compare | Which model wins each class:
+2026-10-25 10:59:21,141 | INFO    | docclf.run_compare |   advertisement  resnet50         F1 0.9289 (margin 0.0143 over baseline_cnn_v4)
+2026-10-25 10:59:21,142 | INFO    | docclf.run_compare |   budget         resnet50         F1 0.8228 (margin 0.0528 over baseline_cnn_v4)
+2026-10-25 10:59:21,142 | INFO    | docclf.run_compare |   form           resnet50         F1 0.7801 (margin 0.0672 over baseline_cnn_v4)
+2026-10-25 10:59:21,142 | INFO    | docclf.run_compare |   handwritten    resnet50         F1 0.9279 (margin 0.0232 over baseline_cnn_v4)
+2026-10-25 10:59:21,143 | INFO    | docclf.run_compare |   invoice        resnet50         F1 0.8419 (margin 0.0798 over baseline_cnn_v4)
+2026-10-25 10:59:21,143 | INFO    | docclf.run_compare |   letter         resnet50         F1 0.8762 (margin 0.0631 over baseline_cnn_v4)
+2026-10-25 10:59:21,143 | INFO    | docclf.run_compare |   memo           resnet50         F1 0.8866 (margin 0.0559 over baseline_cnn_v4)
+2026-10-25 10:59:21,143 | INFO    | docclf.run_compare |   resume         baseline_cnn_v4  F1 0.9386 (margin 0.0145 over resnet50)
+2026-10-25 10:59:21,821 | INFO    | docclf.run_compare | Models compared: resnet50, baseline_cnn_v4
+2026-10-25 10:59:21,821 | INFO    | docclf.run_compare | Families represented: 2
+2026-10-25 10:59:21,822 | INFO    | docclf.run_compare | Best macro-F1: 0.8736 (resnet50)
+2026-10-25 10:59:21,822 | INFO    | docclf.run_compare | Files written: 8
+2026-10-25 10:59:21,822 | INFO    | docclf.run_compare | Recommendation: Recommended model: resnet50 (macro-F1 0.8736, accuracy 0.8742)
+2026-10-25 10:59:21,823 | INFO    | docclf.run_compare | Wrote outputs\comparison\comparison.csv
+2026-10-25 10:59:21,823 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\metric_comparison.png
+2026-10-25 10:59:21,824 | INFO    | docclf.run_compare | Wrote outputs\comparison\per_class_all_models.csv
+2026-10-25 10:59:21,824 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\per_class_comparison.png
+2026-10-25 10:59:21,824 | INFO    | docclf.run_compare | Wrote outputs\comparison\class_strengths.csv
+2026-10-25 10:59:21,824 | INFO    | docclf.run_compare | Wrote outputs\comparison\history_all_models.csv
+2026-10-25 10:59:21,824 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\history_comparison.png
+2026-10-25 10:59:21,824 | INFO    | docclf.run_compare | Wrote outputs\comparison\errors_all_models.csv
+2026-10-25 11:34:32,874 | INFO    | docclf.run_compare | Which model wins each class:
+2026-10-25 11:34:32,875 | INFO    | docclf.run_compare |   advertisement  resnet50         F1 0.9289 (margin 0.0143 over baseline_cnn_v4)
+2026-10-25 11:34:32,875 | INFO    | docclf.run_compare |   budget         resnet50         F1 0.8228 (margin 0.0528 over baseline_cnn_v4)
+2026-10-25 11:34:32,875 | INFO    | docclf.run_compare |   form           resnet50         F1 0.7801 (margin 0.0672 over baseline_cnn_v4)
+2026-10-25 11:34:32,875 | INFO    | docclf.run_compare |   handwritten    resnet50         F1 0.9279 (margin 0.0232 over baseline_cnn_v4)
+2026-10-25 11:34:32,875 | INFO    | docclf.run_compare |   invoice        resnet50         F1 0.8419 (margin 0.0798 over baseline_cnn_v4)
+2026-10-25 11:34:32,876 | INFO    | docclf.run_compare |   letter         resnet50         F1 0.8762 (margin 0.0631 over baseline_cnn_v4)
+2026-10-25 11:34:32,876 | INFO    | docclf.run_compare |   memo           resnet50         F1 0.8866 (margin 0.0559 over baseline_cnn_v4)
+2026-10-25 11:34:32,876 | INFO    | docclf.run_compare |   resume         baseline_cnn_v4  F1 0.9386 (margin 0.0145 over resnet50)
+2026-10-25 11:34:33,244 | INFO    | docclf.run_compare | Models compared: vit_b16, resnet50, baseline_cnn_v4
+2026-10-25 11:34:33,244 | INFO    | docclf.run_compare | Families represented: 3
+2026-10-25 11:34:33,244 | INFO    | docclf.run_compare | Best macro-F1: 0.8828 (vit_b16)
+2026-10-25 11:34:33,244 | INFO    | docclf.run_compare | Files written: 9
+2026-10-25 11:34:33,245 | INFO    | docclf.run_compare | Recommendation: Recommended model: vit_b16 (macro-F1 0.8828, accuracy 0.8829, 13.4 ms per image)
+2026-10-25 11:34:33,245 | INFO    | docclf.run_compare | Wrote outputs\comparison\comparison.csv
+2026-10-25 11:34:33,245 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\accuracy_against_cost.png
+2026-10-25 11:34:33,245 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\metric_comparison.png
+2026-10-25 11:34:33,245 | INFO    | docclf.run_compare | Wrote outputs\comparison\per_class_all_models.csv
+2026-10-25 11:34:33,245 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\per_class_comparison.png
+2026-10-25 11:34:33,245 | INFO    | docclf.run_compare | Wrote outputs\comparison\class_strengths.csv
+2026-10-25 11:34:33,246 | INFO    | docclf.run_compare | Wrote outputs\comparison\history_all_models.csv
+2026-10-25 11:34:33,246 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\history_comparison.png
+2026-10-25 11:34:33,246 | INFO    | docclf.run_compare | Wrote outputs\comparison\errors_all_models.csv
+2026-10-25 11:45:21,200 | INFO    | docclf.run_compare | Which model wins each class:
+2026-10-25 11:45:21,200 | INFO    | docclf.run_compare |   advertisement  resnet50         F1 0.9289 (margin 0.002 over vit_b16)
+2026-10-25 11:45:21,201 | INFO    | docclf.run_compare |   budget         vit_b16          F1 0.8571 (margin 0.0343 over resnet50)
+2026-10-25 11:45:21,201 | INFO    | docclf.run_compare |   form           vit_b16          F1 0.7907 (margin 0.0106 over resnet50)
+2026-10-25 11:45:21,201 | INFO    | docclf.run_compare |   handwritten    resnet50         F1 0.9279 (margin 0.0078 over vit_b16)
+2026-10-25 11:45:21,201 | INFO    | docclf.run_compare |   invoice        vit_b16          F1 0.8677 (margin 0.0258 over resnet50)
+2026-10-25 11:45:21,202 | INFO    | docclf.run_compare |   letter         resnet50         F1 0.8762 (margin 0.0042 over vit_b16)
+2026-10-25 11:45:21,202 | INFO    | docclf.run_compare |   memo           resnet50         F1 0.8866 (margin 0.0116 over vit_b16)
+2026-10-25 11:45:21,202 | INFO    | docclf.run_compare |   resume         vit_b16          F1 0.9532 (margin 0.0146 over baseline_cnn_v4)
+2026-10-25 11:45:21,556 | INFO    | docclf.run_compare | Models compared: vit_b16, resnet50, baseline_cnn_v4
+2026-10-25 11:45:21,556 | INFO    | docclf.run_compare | Families represented: 3
+2026-10-25 11:45:21,556 | INFO    | docclf.run_compare | Best macro-F1: 0.8828 (vit_b16)
+2026-10-25 11:45:21,556 | INFO    | docclf.run_compare | Files written: 9
+2026-10-25 11:45:21,557 | INFO    | docclf.run_compare | Recommendation: Recommended model: vit_b16 (macro-F1 0.8828, accuracy 0.8829, 13.4 ms per image)
+2026-10-25 11:45:21,557 | INFO    | docclf.run_compare | Wrote outputs\comparison\comparison.csv
+2026-10-25 11:45:21,557 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\accuracy_against_cost.png
+2026-10-25 11:45:21,557 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\metric_comparison.png
+2026-10-25 11:45:21,557 | INFO    | docclf.run_compare | Wrote outputs\comparison\per_class_all_models.csv
+2026-10-25 11:45:21,557 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\per_class_comparison.png
+2026-10-25 11:45:21,557 | INFO    | docclf.run_compare | Wrote outputs\comparison\class_strengths.csv
+2026-10-25 11:45:21,558 | INFO    | docclf.run_compare | Wrote outputs\comparison\history_all_models.csv
+2026-10-25 11:45:21,558 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\history_comparison.png
+2026-10-25 11:45:21,558 | INFO    | docclf.run_compare | Wrote outputs\comparison\errors_all_models.csv
+2026-10-25 11:53:49,874 | INFO    | docclf.run_compare | Which model wins each class:
+2026-10-25 11:53:49,875 | INFO    | docclf.run_compare |   advertisement  resnet50         F1 0.9289 (margin 0.002 over vit_b16)
+2026-10-25 11:53:49,875 | INFO    | docclf.run_compare |   budget         vit_b16          F1 0.8571 (margin 0.0343 over resnet50)
+2026-10-25 11:53:49,875 | INFO    | docclf.run_compare |   form           vit_b16          F1 0.7907 (margin 0.0106 over resnet50)
+2026-10-25 11:53:49,876 | INFO    | docclf.run_compare |   handwritten    resnet50         F1 0.9279 (margin 0.0078 over vit_b16)
+2026-10-25 11:53:49,876 | INFO    | docclf.run_compare |   invoice        vit_b16          F1 0.8677 (margin 0.0258 over resnet50)
+2026-10-25 11:53:49,876 | INFO    | docclf.run_compare |   letter         resnet50         F1 0.8762 (margin 0.0042 over vit_b16)
+2026-10-25 11:53:49,877 | INFO    | docclf.run_compare |   memo           resnet50         F1 0.8866 (margin 0.0116 over vit_b16)
+2026-10-25 11:53:49,877 | INFO    | docclf.run_compare |   resume         vit_b16          F1 0.9532 (margin 0.0146 over baseline_cnn_v4)
+2026-10-25 11:53:50,331 | INFO    | docclf.run_compare | Models compared: vit_b16, resnet50, baseline_cnn_v4
+2026-10-25 11:53:50,332 | INFO    | docclf.run_compare | Families represented: 3
+2026-10-25 11:53:50,332 | INFO    | docclf.run_compare | Best macro-F1: 0.8828 (vit_b16)
+2026-10-25 11:53:50,332 | INFO    | docclf.run_compare | Files written: 9
+2026-10-25 11:53:50,332 | INFO    | docclf.run_compare | Recommendation: Recommended model: vit_b16 (macro-F1 0.8828, accuracy 0.8829, 13.4 ms per image)
+2026-10-25 11:53:50,332 | INFO    | docclf.run_compare | Wrote outputs\comparison\comparison.csv
+2026-10-25 11:53:50,333 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\accuracy_against_cost.png
+2026-10-25 11:53:50,333 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\metric_comparison.png
+2026-10-25 11:53:50,333 | INFO    | docclf.run_compare | Wrote outputs\comparison\per_class_all_models.csv
+2026-10-25 11:53:50,333 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\per_class_comparison.png
+2026-10-25 11:53:50,334 | INFO    | docclf.run_compare | Wrote outputs\comparison\class_strengths.csv
+2026-10-25 11:53:50,334 | INFO    | docclf.run_compare | Wrote outputs\comparison\history_all_models.csv
+2026-10-25 11:53:50,334 | INFO    | docclf.run_compare | Wrote outputs\comparison\figures\history_comparison.png
+2026-10-25 11:53:50,334 | INFO    | docclf.run_compare | Wrote outputs\comparison\errors_all_models.csv

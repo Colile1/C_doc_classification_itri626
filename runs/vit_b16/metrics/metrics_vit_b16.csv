@@ -1,0 +1,2 @@
+model,n_samples,accuracy,macro_precision,macro_recall,macro_f1,weighted_precision,weighted_recall,weighted_f1
+vit_b16,2400,0.8829,0.8834,0.8829,0.8828,0.8834,0.8829,0.8828
