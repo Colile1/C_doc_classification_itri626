@@ -9,7 +9,7 @@
 # On Colab, torch and torchvision are already present; install the rest only.
 #
 # Windows note: create the virtual environment outside the repository (for
-# example C:\Users\<name>\venvs\itri626). The repository path is deep enough
+# example %USERPROFILE%\venvs\itri626). The repository path is deep enough
 # that torch's own file names exceed the Windows path limit inside `.venv`.
 
 # Core

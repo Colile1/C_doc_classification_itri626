@@ -1,0 +1,32 @@
+# baseline_cnn_v4.yaml — the from-scratch baseline, retrained on the GPU platform.
+# Author: Colile Sibanda
+#
+# Identical to baseline_cnn.yaml in every respect that affects learning: same
+# architecture, same 25 epochs, same learning rate, optimiser, schedule, weight
+# decay, early stopping and class weighting, on the same committed split.
+#
+# Its purpose is platform consistency, not a better score. The original baseline
+# was trained on the laptop CPU at batch size 8, while ResNet50 and ViT-B/16
+# were trained on a Colab T4 at batch size 32. Retraining the baseline on the
+# same platform means all three model families share one device, one batch size
+# and one precision setting, so the comparison needs no cross-machine caveat.
+#
+# The original run is NOT overwritten. It keeps outputs/ and stays in the record
+# as the measurement of what the same model costs on CPU — which is the evidence
+# behind the compute-limitation discussion.
+#
+# Use the GPU result in the three-family comparison, and cite the CPU run when
+# reporting training cost.
+
+extends: baseline_cnn.yaml
+
+name: baseline_cnn_v4
+
+paths:
+  checkpoints: runs/baseline_cnn_v4/checkpoints
+  figures: runs/baseline_cnn_v4/figures
+  metrics: runs/baseline_cnn_v4/metrics
+  logs: runs/baseline_cnn_v4/logs
+
+train:
+  model: baseline_cnn_v4

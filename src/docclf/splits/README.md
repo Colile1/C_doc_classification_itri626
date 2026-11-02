@@ -6,7 +6,7 @@ module that can silently invalidate the entire project: a leaked split
 produces high test scores that mean nothing, and nothing downstream will
 complain. It is therefore built test-first and reviewed before use.
 
-## Planned files
+## The modules
 
 | File | Responsibility |
 |------|----------------|
@@ -22,9 +22,7 @@ every model in `training` must use. Imports nothing from `models` or
 `training` — the split is fixed once and is not permitted to vary per
 architecture.
 
-Done when: `pytest tests/test_leakage.py` passes, including a
-deliberately poisoned fixture that the check must reject, and
-`describe_splits` totals equal the working-set count exactly.
+The tests hold this module to one guarantee: `pytest tests/test_leakage.py` passes, including a deliberately poisoned fixture that the check must reject, and `describe_splits` totals equal the working-set count exactly.
 
 The tests were written before the code. Twelve tests pass, including the
 poisoned fixture, the planted cross-split near-duplicate, reproducibility

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+import time
 from pathlib import Path
 
 import pandas as pd
@@ -38,6 +39,7 @@ def prepare_data(cfg: RunConfig, paths: ProjectPaths, reuse_cleaned: bool = Fals
     The cleaned (uncapped) manifest is kept in `data/interim/`, so changing
     `data.n_per_class` costs seconds rather than a full re-clean.
     """
+    preparation_started = time.perf_counter()
     cleaned_path = paths.interim / f"{CLEANED_PREFIX}{cfg.name}.csv"
     report_path = paths.splits / CLEANING_REPORT_NAME
     if reuse_cleaned:
@@ -46,10 +48,18 @@ def prepare_data(cfg: RunConfig, paths: ProjectPaths, reuse_cleaned: bool = Fals
     else:
         with timed("Dataset acquisition"):
             root = fetch_dataset(cfg, paths.raw)
+        LOGGER.info("Dataset image root: %s", root)
         with timed("Manifest build"):
             manifest = build_manifest(root, cfg.classes, cfg.data.group_pattern)
+        _log_class_counts(LOGGER, "Raw images", manifest)
+        total_bytes = int(manifest["bytes"].sum())
+        LOGGER.info("Raw image bytes: %d (%.2f GiB)", total_bytes, total_bytes / (1024 ** 3))
         with timed("Cleaning"):
             cleaned, report = clean_manifest(manifest, cfg)
+        _log_class_counts(LOGGER, "Cleaned images", cleaned)
+        for reason, count in report.summary().items():
+            if reason not in ("raw_count", "kept_count"):
+                LOGGER.info("Cleaning removal count (%s): %d", reason, count)
         cleaned.to_csv(cleaned_path, index=False, encoding="utf-8")
         report.to_frame().to_csv(report_path, index=False, encoding="utf-8")
         raw_count = report.raw_count
@@ -59,6 +69,7 @@ def prepare_data(cfg: RunConfig, paths: ProjectPaths, reuse_cleaned: bool = Fals
         )
     working_path = paths.processed / WORKING_SET_NAME
     working.to_csv(working_path, index=False, encoding="utf-8")
+    _log_class_counts(LOGGER, "Working-set images", working)
     log_values(
         LOGGER,
         {
@@ -69,9 +80,18 @@ def prepare_data(cfg: RunConfig, paths: ProjectPaths, reuse_cleaned: bool = Fals
             "Cleaning report": report_path,
             "Cleaned manifest": cleaned_path,
             "Working set": working_path,
+            "Preparation total seconds": round(time.perf_counter() - preparation_started, 3),
         },
     )
     return working_path
+
+
+def _log_class_counts(logger, label: str, frame: pd.DataFrame) -> None:
+    """Log the per-class distribution at each data preparation stage."""
+    if "class_name" not in frame.columns:
+        return
+    for class_name, count in frame["class_name"].value_counts().sort_index().items():
+        logger.info("%s by class (%s): %d", label, class_name, int(count))
 
 
 def load_cleaned(cleaned_path: Path, raw_dir: Path) -> pd.DataFrame:

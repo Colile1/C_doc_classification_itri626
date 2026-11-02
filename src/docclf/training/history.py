@@ -20,6 +20,10 @@ class EpochRecord:
     val_macro_f1: float
     learning_rate: float
     seconds: float
+    train_seconds: float = 0.0
+    val_seconds: float = 0.0
+    train_images_per_second: float = 0.0
+    val_images_per_second: float = 0.0
 
 
 @dataclass
@@ -52,6 +56,10 @@ class TrainingHistory:
             "val_macro_f1",
             "learning_rate",
             "seconds",
+            "train_seconds",
+            "val_seconds",
+            "train_images_per_second",
+            "val_images_per_second",
         ]
         frame = pd.DataFrame([asdict(item) for item in self.records], columns=columns)
         frame.insert(0, "model", self.model_name)

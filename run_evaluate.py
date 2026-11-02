@@ -42,7 +42,7 @@ def evaluate_model(cfg: RunConfig, paths: ProjectPaths) -> pd.DataFrame:
     Output: the refreshed comparison table. The held-out split is touched here
     and nowhere else in the pipeline.
     """
-    splits = load_splits(paths.splits)
+    splits = load_splits(paths.splits, root=paths.root, raw=paths.raw)
     assert_no_group_overlap(splits, cfg.split.group_column)
     loaders = build_dataloaders(splits, cfg)
     device = select_device(cfg)

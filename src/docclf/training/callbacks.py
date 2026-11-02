@@ -62,6 +62,16 @@ class EarlyStopping:
         """Purpose: report whether the last update was an improvement. Output: bool."""
         return self.bad_epochs == 0
 
+    def state_dict(self) -> dict[str, Any]:
+        """Purpose: capture the patience counter so a resumed run does not forget
+        how many epochs have already failed to improve. Output: the state."""
+        return {"best": self.best, "bad_epochs": self.bad_epochs}
+
+    def load_state_dict(self, state: dict[str, Any]) -> None:
+        """Purpose: restore the patience counter on resume. Input: the state."""
+        self.best = state["best"]
+        self.bad_epochs = int(state["bad_epochs"])
+
 
 class Checkpoint:
     """Writes the model state every epoch, and keeps a copy of the best epoch."""
@@ -86,11 +96,19 @@ class Checkpoint:
         """Purpose: the best-epoch checkpoint path, the one evaluation loads."""
         return self.directory / f"{self.model_name}_best.pt"
 
-    def save(self, model: nn.Module, epoch: int, metrics: dict[str, float], best: bool) -> Path:
+    def save(
+        self,
+        model: nn.Module,
+        epoch: int,
+        metrics: dict[str, float],
+        best: bool,
+        training_state: dict[str, Any] | None = None,
+    ) -> Path:
         """Purpose: write this epoch's checkpoint, and the best copy when it is one.
 
-        Inputs: the model, the epoch number, the epoch's metrics, and whether
-        this epoch is the best so far.
+        Inputs: the model, the epoch number, the epoch's metrics, whether this
+        epoch is the best so far, and the optimiser/scheduler/early-stopping
+        state that lets another machine resume exactly where this one stopped.
         Output: the path written for this epoch.
         """
         payload = {
@@ -99,6 +117,8 @@ class Checkpoint:
             "metrics": dict(metrics),
             "state_dict": model.state_dict(),
         }
+        if training_state is not None:
+            payload["training_state"] = training_state
         torch.save(payload, self.last_path)
         if best:
             torch.save(payload, self.best_path)

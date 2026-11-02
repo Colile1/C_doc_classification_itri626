@@ -6,7 +6,7 @@ on, and seeds every source of randomness. This module is the reason the
 identical repository runs unchanged on the laptop, on Colab and on a
 school GPU.
 
-## Planned files
+## The modules
 
 | File | Responsibility |
 |------|----------------|
@@ -22,8 +22,7 @@ touched. Depends only on `utils`. Must NOT import `data`, `models` or
 `training` — a config load has to work in an environment where torch
 weights are unavailable.
 
-Done when: a config with an unknown key is rejected by name, and two runs
-with the same seed produce byte-identical split files.
+The tests hold this module to one guarantee: a config with an unknown key is rejected by name, and two runs with the same seed produce byte-identical split files.
 
 `load_config` takes the `env` argument so that one call
 loads the run config and the machine overlay together; `resolve_paths`

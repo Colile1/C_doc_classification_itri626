@@ -5,7 +5,7 @@ from the held-out test set. Correctness-critical because a subtly wrong
 averaging mode or a mislabelled confusion axis produces a plausible table
 that says the opposite of the truth.
 
-## Planned files
+## The modules
 
 | File | Responsibility |
 |------|----------------|
@@ -23,9 +23,7 @@ Consumes `models` and a test DataLoader. Writes to `outputs/metrics/` and
 `outputs/figures/`, which `report/` and `slides/` then reference. Never
 imports `training`.
 
-Done when: `pytest tests/test_metrics.py` reproduces hand-computed
-metrics on a small fixed confusion fixture, including a deliberately
-imbalanced case where accuracy and macro-F1 disagree.
+The tests hold this module to one guarantee: `pytest tests/test_metrics.py` reproduces hand-computed metrics on a small fixed confusion fixture, including a deliberately imbalanced case where accuracy and macro-F1 disagree.
 
 Built at steps 10 and 11, tests written first. Twelve tests pass. The
 imbalanced fixture is eight correct pages of one class against one page

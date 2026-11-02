@@ -5,23 +5,92 @@ where logic lives: each one imports `docclf` and shows outputs. If a
 notebook cell grows past a few lines of real logic, that logic belongs in
 `src/` and the notebook calls it.
 
-## Planned files
+## Files
 
 | File | Responsibility |
 |------|----------------|
+| `00_run_control.ipynb` | Not submitted. The working control panel: what is done, what is running on another machine, what to start next, a live view of a run in progress, and the comparison so far |
 | `01_dataset_and_cleaning.ipynb` | Class definitions, counts before and after cleaning, what was removed and why, representative images from all eight classes |
 | `02_splits_and_leakage.ipynb` | The grouped split, per-split class distribution, the seed, and the executed leakage check with its output visible |
 | `03_train_baseline_cnn.ipynb` | Baseline training run and its curves |
 | `04_train_resnet50.ipynb` | Transfer-learning run, including the frozen-layer justification |
 | `05_train_vit.ipynb` | Transformer run |
-| `06_evaluation_and_comparison.ipynb` | Test metrics for all three, confusion matrices, error analysis, efficiency table, final recommendation |
+| `06_evaluation_and_comparison.ipynb` | Test metrics for every model, confusion matrices, error analysis, efficiency table, final recommendation |
+
+## 00 — the one to open first
+
+```bash
+jupyter lab notebooks/00_run_control.ipynb
+```
+
+It is the notebook equivalent of `run_status.py` plus `run_compare.py`:
+
+- **Section 1** — every model's state, the machine holding it, and its scores.
+- **Section 2** — the exact command this machine should run next.
+- **Section 3** — start or resume a run from the notebook. It claims the model
+  first, so two machines cannot train the same one, and releases the claim
+  afterwards. For a run of several hours prefer `./train_model.sh <model>` in a
+  terminal, which survives the notebook being closed.
+- **Section 4** — a live view of a run in progress: epochs done, minutes per
+  epoch, best score so far, estimated time remaining, and the loss and macro-F1
+  curves. Safe to re-run while another process is training; it only reads the
+  history CSV the trainer appends to.
+- **Sections 5 and 6** — the cross-model comparison and the per-class winners,
+  as far as the finished runs allow.
+
+It is a working tool, not a deliverable, so it does not need committed outputs.
+
+## 06 — the analysis that is submitted
+
+Reads each model's **recorded** predictions rather than re-running inference,
+so it is fast, and it works even though the models were trained on different
+machines. Models that are not evaluated yet are named and skipped, so the
+notebook runs correctly before the last training run has landed.
+
+The saved prediction table keeps the winning class's confidence rather than the
+full logit vector. The metrics, confusion matrices and error analysis it
+produces are exact; anything needing the full distribution, such as a
+calibration curve, would have to re-run `collect_predictions` against the
+checkpoints.
+
+## Running a training notebook
+
+Notebooks 03, 04 and 05 each train one model, and each can be run straight
+through. Before training they claim the model, so a second machine cannot start
+the same one, and they resume automatically when a checkpoint is already there
+— the optimiser and learning-rate schedule carry over, so a run paused on
+another machine is continued rather than restarted. The claim is released even
+if the cell raises.
+
+The training cell blocks for as long as training takes, and the notebook has to
+stay open. For a run of several hours prefer the terminal:
+
+```bash
+./train_model.sh resnet50
+```
+
+which does the same thing, survives the notebook being closed, and evaluates the
+model when training finishes.
+
+## What a notebook will not do
+
+Notebook 02 **refuses to overwrite the committed split files** when they already
+exist. Every recorded result was measured on that split; replacing it would make
+all of those numbers incomparable while everything still appeared to work. The
+notebook prints what it found and carries on. Set `OVERWRITE_SPLITS = True` in
+that cell only to rebuild the split deliberately, before any model has been
+trained on it.
 
 ## Integration
 
-Notebooks 03 to 05 are the ones that run on Colab; 01, 02 and 06 run
-comfortably on the laptop. Each begins with the same four lines: install,
-`sys.path` setup, `load_config`, `set_global_seed`.
+Each notebook begins with the same lines: `sys.path` setup for both `src/` and
+the project root, `load_config`, `resolve_paths`, `set_global_seed`. Notebooks
+that read a split must pass `root=paths.root` to `load_splits`, because image
+paths are stored relative to the project root so the same split files work on
+every machine.
 
-Done when: every notebook has been re-run top to bottom in a fresh
-kernel, and its committed copy has all outputs, figures and metric tables
-visible, as the submission specification requires.
+The submission requires each notebook to carry its outputs: every figure and
+metric table must be visible in the committed copy rather than regenerated by
+the reader. Notebooks 01, 02 and 06 have been executed end to end against the
+recorded results; 03 to 05 each wrap a training run, so their outputs come from
+the machine that trained that model.

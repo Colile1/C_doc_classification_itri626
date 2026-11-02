@@ -58,7 +58,7 @@ def build_split(cfg: RunConfig, paths: ProjectPaths) -> Path:
     summary = describe_splits(splits, cfg.split.group_column)
     summary_path = paths.splits / SUMMARY_NAME
     summary.to_csv(summary_path, index=False, encoding="utf-8")
-    written = save_splits(splits, paths.splits)
+    written = save_splits(splits, paths.splits, root=paths.root)
     log_values(
         LOGGER,
         {

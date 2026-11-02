@@ -5,7 +5,7 @@ yields tensors". This module owns the evidence the report needs for
 dataset preparation: counts before and after cleaning, what was removed
 and why, and representative examples per class.
 
-## Planned files
+## The modules
 
 | File | Responsibility |
 |------|----------------|
@@ -23,9 +23,7 @@ Consumes `config`; produces the manifest that `splits` divides. Holds no
 knowledge of which model will consume the batches — input size and
 normalisation arrive through the config, not through a model import.
 
-Done when: the cleaning report accounts for every image lost between the
-raw count and the working count, and `build_transforms(train=False)`
-provably applies no random operation.
+The tests hold this module to one guarantee: the cleaning report accounts for every image lost between the raw count and the working count, and `build_transforms(train=False)` provably applies no random operation.
 
 Built at steps 4, 5 and 7. `clean_manifest` adds a `phash` column, which
 is what lets `splits.leakage` run its second line of defence without

@@ -15,6 +15,11 @@ from docclf.models.transformer import build_transformer
 # third rows are alternatives within one family; they are not a fourth model.
 MODEL_BUILDERS: dict[str, Callable[..., nn.Module]] = {
     "baseline_cnn": build_baseline_cnn,
+    # Same architecture as the baseline; v2 begins from its saved weights.
+    "baseline_cnn_v2": build_baseline_cnn,
+    # Same architecture and settings as the baseline, retrained on the GPU
+    # platform so all three families share one device and batch size.
+    "baseline_cnn_v4": build_baseline_cnn,
     "resnet50": lambda n, cfg: build_pretrained_cnn(n, cfg, backbone="resnet50"),
     "mobilenetv3": lambda n, cfg: build_pretrained_cnn(n, cfg, backbone="mobilenetv3"),
     "vit_b16": lambda n, cfg: build_transformer(n, cfg, backbone="vit_b16"),
@@ -23,6 +28,8 @@ MODEL_BUILDERS: dict[str, Callable[..., nn.Module]] = {
 
 MODEL_FAMILIES: dict[str, str] = {
     "baseline_cnn": "CNN from scratch",
+    "baseline_cnn_v2": "CNN from scratch",
+    "baseline_cnn_v4": "CNN from scratch",
     "resnet50": "Pretrained convolutional",
     "mobilenetv3": "Pretrained convolutional",
     "vit_b16": "Pretrained transformer",

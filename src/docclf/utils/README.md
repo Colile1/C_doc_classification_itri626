@@ -3,7 +3,7 @@
 Small shared helpers with no project-specific knowledge. Anything that
 would otherwise be copied into two modules belongs here.
 
-## Planned files
+## The modules
 
 | File | Responsibility |
 |------|----------------|
@@ -18,6 +18,4 @@ Imported by every other module; imports none of them. If a helper here
 ever needs to import from `config` or above, it is not a utility and
 belongs in the calling module.
 
-Done when: no module in `docclf` outside `utils` calls `print()`, and
-`hashing` has a test proving two visually identical images collide and
-two different ones do not.
+The tests hold this module to one guarantee: no module in `docclf` outside `utils` calls `print()`, and `hashing` has a test proving two visually identical images collide and two different ones do not.

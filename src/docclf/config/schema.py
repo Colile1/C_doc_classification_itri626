@@ -67,6 +67,7 @@ class ImageConfig:
     contrast: float = 0.15
     blur_probability: float = 0.20
     crop_scale: tuple[float, float] = (0.85, 1.0)
+    preserve_aspect_ratio: bool = False
 
 
 @dataclass(frozen=True)

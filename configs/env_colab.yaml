@@ -1,14 +1,26 @@
-# env_colab.yaml — Colab free T4: the primary trainer for all three models.
+# env_colab.yaml — Colab free T4: the fastest way to train the heavier models.
 # Author: Colile Sibanda
 #
-# Checkpoints are written to Drive so a disconnect costs one epoch, not a run.
+# Only the settings that genuinely differ per machine belong here: the device,
+# the batch size the GPU can hold, and where the dataset is unpacked. The output
+# directories are deliberately NOT set, so each model keeps the per-model paths
+# its own config defines (runs/<model>/...) and no two models overwrite each
+# other's results on Drive.
+#
+# `root: "."` means the project directory itself, wherever it was put. Copy the
+# project onto Drive and run from there — any folder, any name — and the
+# checkpoints, metrics, figures and logs all land on Drive, so a disconnect
+# costs the current epoch rather than the run. Hardcoding a path here would
+# break the moment the folder was named or nested differently.
+#
+# Leave `raw` on local disk: reading 16 000 images per epoch over the Drive
+# FUSE mount is far slower than the GPU it feeds.
 
 paths:
-  root: /content/itri626-doc-classification
+  root: "."
   raw: /content/data/raw
   interim: /content/data/interim
   processed: /content/data/processed
-  checkpoints: /content/drive/MyDrive/itri626/checkpoints
 
 train:
   batch_size: 32

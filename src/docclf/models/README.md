@@ -4,7 +4,7 @@ Builds the three architectures behind one interface, so the training loop
 never contains an `if model_name ==` branch. Each builder returns a
 module whose final layer already matches the project's class count.
 
-## Planned files
+## The modules
 
 | File | Responsibility |
 |------|----------------|
@@ -20,9 +20,7 @@ Consumes `config` only. Knows nothing about datasets, splits or
 training. Used by `training` and by `evaluation` (for the efficiency
 comparison).
 
-Done when: all three builders return a module that accepts a
-`(batch, 3, H, W)` tensor and emits `(batch, n_classes)` logits, verified
-by a shape test that needs no data.
+The tests hold this module to one guarantee: all three builders return a module that accepts a `(batch, 3, H, W)` tensor and emits `(batch, n_classes)` logits, verified by a shape test that needs no data.
 
 The registry holds five names across the three fixed
 families: `baseline_cnn`; `resnet50` and `mobilenetv3` (one is chosen);

@@ -1,12 +1,22 @@
 # vit_b16.yaml — the transformer entry (objective O5). ViT-B/16, or Swin-T as the fallback.
 # Author: Colile Sibanda
 #
-# If ViT-B/16 will not fit the Colab session budget, switch `model` to
-# swin_t; nothing else in this file changes.
+# If ViT-B/16 will not fit the session budget, switch `model` to swin_t and set
+# the paths below to runs/swin_t/; nothing else in this file changes.
+#
+# Every output of this model is written under runs/vit_b16/, so no other
+# model's checkpoints, history, figures or metrics can be overwritten. The run
+# is resumable on another machine with `run_train.py ... --resume`.
 
 extends: base.yaml
 
 name: vit_b16
+
+paths:
+  checkpoints: runs/vit_b16/checkpoints
+  figures: runs/vit_b16/figures
+  metrics: runs/vit_b16/metrics
+  logs: runs/vit_b16/logs
 
 train:
   model: vit_b16

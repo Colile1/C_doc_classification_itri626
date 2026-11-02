@@ -136,6 +136,75 @@ def test_whole_pipeline_runs_end_to_end(context) -> None:
     assert (paths.figures / f"curves_{cfg.train.model}.png").is_file()
 
 
+def test_paused_run_resumes_without_repeating_epochs(context) -> None:
+    """A run stopped part-way must continue from its own checkpoint, not restart.
+
+    This is what lets one machine finish what another started: the epoch numbers
+    carry on, the history keeps the earlier epochs, and the optimiser and
+    scheduler resume instead of being rebuilt from scratch.
+    """
+    cfg, paths = context
+    load_orchestrator("run_prepare_data").prepare_data(cfg, paths)
+    load_orchestrator("run_split").build_split(cfg, paths)
+    run_train = load_orchestrator("run_train")
+
+    short = dataclasses.replace(cfg, train=dataclasses.replace(cfg.train, epochs=1))
+    first = run_train.train_model(short, paths)
+    assert [item.epoch for item in first.records] == [1]
+
+    longer = dataclasses.replace(cfg, train=dataclasses.replace(cfg.train, epochs=3))
+    second = run_train.train_model(longer, paths, resume=True)
+    assert [item.epoch for item in second.records] == [1, 2, 3], (
+        "a resumed run must keep the completed epochs and continue after them"
+    )
+    # The first epoch's recorded loss is the one from the original run, carried
+    # through the checkpoint rather than recomputed.
+    assert second.records[0].train_loss == first.records[0].train_loss
+
+
+def test_resuming_a_finished_run_does_nothing(context) -> None:
+    """Resuming a run that already reached its epoch budget must not retrain."""
+    cfg, paths = context
+    load_orchestrator("run_prepare_data").prepare_data(cfg, paths)
+    load_orchestrator("run_split").build_split(cfg, paths)
+    run_train = load_orchestrator("run_train")
+
+    one = dataclasses.replace(cfg, train=dataclasses.replace(cfg.train, epochs=1))
+    run_train.train_model(one, paths)
+    again = run_train.train_model(one, paths, resume=True)
+    assert [item.epoch for item in again.records] == [1]
+
+
+def test_resuming_another_models_checkpoint_is_refused(context) -> None:
+    """A checkpoint from a different model must never be silently trained on."""
+    cfg, paths = context
+    load_orchestrator("run_prepare_data").prepare_data(cfg, paths)
+    load_orchestrator("run_split").build_split(cfg, paths)
+    run_train = load_orchestrator("run_train")
+    run_train.train_model(
+        dataclasses.replace(cfg, train=dataclasses.replace(cfg.train, epochs=1)), paths
+    )
+
+    # Same checkpoint directory, different model name: the guard must fire.
+    impostor = dataclasses.replace(
+        cfg, train=dataclasses.replace(cfg.train, model="baseline_cnn_v2", epochs=2)
+    )
+    (paths.checkpoints / "baseline_cnn_v2_last.pt").write_bytes(
+        (paths.checkpoints / f"{cfg.train.model}_last.pt").read_bytes()
+    )
+    with pytest.raises(ValueError, match="holds model"):
+        run_train.train_model(impostor, paths, resume=True)
+
+
+def test_resuming_with_no_checkpoint_is_actionable(context) -> None:
+    """Asking to resume when nothing was started must say so plainly."""
+    cfg, paths = context
+    load_orchestrator("run_prepare_data").prepare_data(cfg, paths)
+    load_orchestrator("run_split").build_split(cfg, paths)
+    with pytest.raises(FileNotFoundError, match="Cannot resume"):
+        load_orchestrator("run_train").train_model(cfg, paths, resume=True)
+
+
 def test_recapping_reuses_the_cleaned_manifest(context) -> None:
     """A new per-class cap must not re-read the images, and must cap the same pages."""
     cfg, paths = context

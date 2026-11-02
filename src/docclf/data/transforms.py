@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from typing import Any, Callable
 
+from PIL import Image
 from torchvision import transforms
 
 # A mirrored page of text does not occur in client onboarding, so a horizontal
@@ -13,6 +14,30 @@ from torchvision import transforms
 FORBIDDEN_TRANSFORMS = ("RandomHorizontalFlip", "RandomVerticalFlip")
 
 PAGE_FILL = 255  # scanned pages have white margins; rotation must not pad black
+
+
+class ResizeAndPad:
+    """Resize a page without changing its aspect ratio, then center it on white."""
+
+    def __init__(self, size: int) -> None:
+        if size < 1:
+            raise ValueError(f"size must be positive, got {size}.")
+        self.size = size
+
+    def __call__(self, image: Image.Image) -> Image.Image:
+        image = image.convert("RGB")
+        width, height = image.size
+        scale = min(self.size / width, self.size / height)
+        resized = image.resize(
+            (max(1, round(width * scale)), max(1, round(height * scale))),
+            resample=Image.Resampling.BILINEAR,
+        )
+        canvas = Image.new("RGB", (self.size, self.size), color=(PAGE_FILL,) * 3)
+        canvas.paste(
+            resized,
+            ((self.size - resized.width) // 2, (self.size - resized.height) // 2),
+        )
+        return canvas
 
 
 def build_transforms(cfg: Any, train: bool) -> Callable:
@@ -24,15 +49,20 @@ def build_transforms(cfg: Any, train: bool) -> Callable:
     """
     image = cfg.image
     size = int(image.size)
+    resize = (
+        ResizeAndPad(size)
+        if bool(getattr(image, "preserve_aspect_ratio", False))
+        else transforms.Resize((size, size))
+    )
     to_tensor = [
         transforms.Grayscale(num_output_channels=3),
         transforms.ToTensor(),
         transforms.Normalize(mean=list(image.mean), std=list(image.std)),
     ]
     if not train:
-        return transforms.Compose([transforms.Resize((size, size))] + to_tensor)
+        return transforms.Compose([resize] + to_tensor)
     augmentation = [
-        transforms.Resize((size, size)),
+        resize,
         transforms.RandomResizedCrop(
             size, scale=tuple(image.crop_scale), ratio=(0.95, 1.05), antialias=True
         ),

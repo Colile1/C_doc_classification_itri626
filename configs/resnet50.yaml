@@ -3,10 +3,20 @@
 #
 # `freeze_upto` names the last backbone stage kept frozen; everything after it
 # is fine-tuned. The choice is recorded in docs/experiment-log.md.
+#
+# Every output of this model is written under runs/resnet50/, so no other
+# model's checkpoints, history, figures or metrics can be overwritten. The run
+# is resumable on another machine with `run_train.py ... --resume`.
 
 extends: base.yaml
 
 name: resnet50
+
+paths:
+  checkpoints: runs/resnet50/checkpoints
+  figures: runs/resnet50/figures
+  metrics: runs/resnet50/metrics
+  logs: runs/resnet50/logs
 
 train:
   model: resnet50

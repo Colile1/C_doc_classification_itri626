@@ -87,6 +87,46 @@ class Predictions:
         return path
 
 
+def load_predictions(path: str | Path, class_names: Sequence[str]) -> Predictions:
+    """Purpose: read back a saved prediction table, so a comparison can be built
+    without re-running inference for every model.
+
+    Inputs: the `predictions_<model>.csv` written by `Predictions.save`, and the
+    class names in class-id order.
+    Output: a Predictions. The saved file keeps the winning class's confidence
+    rather than the full logit vector, so the reconstructed `logits` are
+    one-hot-by-confidence: the confusion matrix, the per-class metrics and the
+    error analysis are exact, and anything needing the full distribution — a
+    calibration curve, a top-k score — must re-run `collect_predictions`.
+    Raises KeyError naming any column the file is missing.
+    """
+    frame = pd.read_csv(path)
+    required = ("path", "true_id", "predicted_id")
+    missing = [name for name in required if name not in frame.columns]
+    if missing:
+        raise KeyError(
+            f"{path} is missing column(s) {', '.join(missing)}; it was not written "
+            f"by Predictions.save."
+        )
+    y_true = frame["true_id"].to_numpy(dtype=int)
+    y_pred = frame["predicted_id"].to_numpy(dtype=int)
+    confidence = (
+        frame["confidence"].to_numpy(dtype=float)
+        if "confidence" in frame.columns
+        else np.ones(len(frame), dtype=float)
+    )
+    logits = np.zeros((len(frame), len(class_names)), dtype=float)
+    if len(frame):
+        logits[np.arange(len(frame)), y_pred] = confidence
+    return Predictions(
+        y_true=y_true,
+        y_pred=y_pred,
+        logits=logits,
+        paths=frame["path"].astype(str).tolist(),
+        class_names=list(class_names),
+    )
+
+
 @torch.no_grad()
 def collect_predictions(
     model: nn.Module,
