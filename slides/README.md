@@ -1,19 +1,26 @@
 # slides/
 
-The oral presentation. All three members present, and
-all three must be able to answer questions on any part.
+The oral presentation is delivered as a slide deck, separately from this
+repository. Both group members present a section, and both answer questions on
+any part of the work.
 
-## Planned files
+## What the presentation covers
 
-| File | Responsibility |
-|------|----------------|
+The problem and why it matters, the dataset and class definitions, the three
+model families and the transfer-learning strategy, the experimental setup, the
+main results with the confusion matrices, the important errors and limitations,
+and the recommended model.
 
-## Required coverage
+## Where the material comes from
 
-The problem and why it matters; the dataset and class definitions; the
-three models and the transfer-learning strategy; the experimental setup;
-the main results and confusion matrix; important errors, limitations and
-lessons; the conclusion and recommended model.
+The figures are in [`outputs/report_figures/`](../outputs/report_figures/),
+and each model's confusion matrix and error examples are in
+`runs/<model>/figures/`. The dashboard in [`ui/`](../ui/) shows the same
+results interactively and classifies an uploaded page live.
 
-Done when: the deck is built to the house style, every member has a
-section, and the timing has been rehearsed against the allotted duration.
+## The question that tests whether the result means anything
+
+How do you know the test score is not inflated by leakage? The split is
+grouped by source document, the overlap check runs before every evaluation,
+and [`tests/test_leakage.py`](../tests/test_leakage.py) proves the check
+rejects a split that shares a document.

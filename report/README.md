@@ -1,20 +1,26 @@
 # report/
 
-The written report. Approximately 10 to 15 pages
-excluding references and appendices, submitted as PDF.
+The written report is submitted as a PDF, separately from this repository.
+This folder holds the material the report is built from.
 
-## Planned files
+## Where the report's evidence lives
 
-| File | Responsibility |
-|------|----------------|
-| `report.md` | The working draft. Prose is written under the honours writing rules, not generated in one pass |
-| `references.bib` | Sources: RVL-CDIP, the three architecture papers, the document-classification prior work, the libraries |
-| `figures/` | Copies of the specific figures from `outputs/figures/` that the report actually uses, so the document does not break when a run is re-executed |
+| Evidence | Location |
+|----------|----------|
+| The twelve report figures | [`outputs/report_figures/`](../outputs/report_figures/) |
+| The three-model comparison table | [`outputs/comparison/comparison.csv`](../outputs/comparison/comparison.csv) |
+| Per-class F1 for every model, and the winner of each class | [`outputs/comparison/per_class_all_models.csv`](../outputs/comparison/per_class_all_models.csv), [`class_strengths.csv`](../outputs/comparison/class_strengths.csv) |
+| Each model's confusion matrix, curves and misclassified pages | `runs/<model>/figures/` |
+| Each model's metrics, predictions and training log | `runs/<model>/metrics/`, `runs/<model>/logs/` |
+| Dataset source, licence and counts | [`docs/dataset-card.md`](../docs/dataset-card.md) |
 
-## Integration
+## The rule the results section follows
 
-Every claim in the results section must name the run that produced it.
-The figures here are copies, not the originals: `outputs/` is
-regenerable, `report/figures/` is frozen at the version that was cited.
+Every number in the report appears in a file under `outputs/` or `runs/`, and
+every claim names the run that produced it. The comparison table, per-class
+scores and error counts are read from those files rather than transcribed by
+hand, which is what makes them checkable.
 
-Every number in the prose must be present in `outputs/metrics/`.
+`report/figures/` is where frozen copies of cited figures go. `outputs/` is
+regenerable, and re-running a model overwrites its figures, so a copy keeps
+the document from changing meaning when a run is repeated.
