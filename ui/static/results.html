@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Results - ITRI626 document classifier</title><link rel="stylesheet" href="/css/theme.css"></head>
+<body><header class="app-bar"><span class="app-name">ITRI626 document classifier</span><span class="breadcrumb">Results</span></header><div class="shell"><nav class="nav-rail"><button class="nav-toggle" type="button" aria-label="Toggle navigation">Menu</button><ul><li><a href="/index.html">Overview</a></li>
+<li><a href="/use.html">Try the classifier</a></li>
+<li><a href="/data.html">Dataset</a></li>
+<li><a href="/results.html" class="active">Results</a></li>
+<li><a href="/models.html">Model results</a></li>
+<li><a href="/comparison.html">Model comparison</a></li></ul></nav><main class="content">
+<div class="card"><div class="card-head"><p class="card-title">Results across the three model families</p><span id="run-status" class="pulse idle">Loading...</span></div>
+<p class="card-body">A convolutional network trained from scratch, a pretrained convolutional network, and a pretrained transformer, compared on one fixed, leakage-checked split.</p>
+<div id="training-summary" class="stat-strip"></div><div id="training-notes"></div></div>
+
+<div class="card"><p class="card-title">Held-out test comparison</p>
+<p class="card-body">The three comparison entries, one per family, on the same 2,400 held-out pages.</p>
+<div id="verdict"></div><div id="page-banner"></div><div id="table-wrap"></div>
+<p><a href="/models.html">Open the full model results page, with figures and per-model strengths &rarr;</a></p></div>
+
+<div class="card"><p class="card-title">How each run went</p>
+<p class="card-body">How each of the three runs went: where it was trained, how many epochs it ran, and the epoch whose validation macro-F1 chose the checkpoint.</p>
+<div id="runs-table"></div></div>
+
+<div class="card"><p class="card-title">Validation curves</p>
+<p class="card-body">All models on shared axes, so the effect of pretraining is visible: where each one starts, how fast it climbs, and whether it was still improving when training stopped.</p>
+<div id="score-chart"></div><div id="loss-chart"></div></div>
+
+<div class="card"><p class="card-title">Per-class F1</p>
+<p class="card-body">Hardest class first. The aggregate score hides where the models actually differ.</p>
+<div id="class-table"></div></div>
+
+<div class="card"><p class="card-title">Which model wins each class</p>
+<p class="card-body">An aggregate score says which model is best overall; this says what each is best at.</p>
+<div id="artifacts"></div></div>
+</main></div><script src="/js/common.js"></script><script src="/js/charts.js"></script><script src="/js/results.js"></script></body></html>

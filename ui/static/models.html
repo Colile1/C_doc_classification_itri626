@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Model results - ITRI626 document classifier</title>
+  <link rel="stylesheet" href="/css/theme.css">
+  <style>
+    .family-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .model-card { border: 1px solid #d9dde3; background: #fff; padding: 14px 16px; }
+    .model-card h3 { margin: 0 0 2px; font-size: 1.05rem; }
+    .model-card .family { font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; color: #5a6472; }
+    .score-row { display: flex; gap: 18px; margin: 10px 0 6px; }
+    .score-row div { flex: 1; }
+    .score-row .n { font-size: 1.5rem; font-weight: 600; display: block; line-height: 1.1; }
+    .score-row .l { font-size: .75rem; color: #5a6472; }
+    .winner { border-left: 4px solid #59a14f; }
+    .proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+    .proscons ul { margin: 4px 0 0; padding-left: 18px; font-size: .84rem; line-height: 1.45; }
+    .proscons .h { font-size: .76rem; letter-spacing: .04em; text-transform: uppercase; font-weight: 600; }
+    .pro .h { color: #3d7a35; } .con .h { color: #a4423c; }
+    .role-tag { font-size: .7rem; padding: 1px 7px; border: 1px solid #c3c9d2; color: #5a6472; }
+    figure.fig { margin: 14px 0 0; }
+    figure.fig img { width: 100%; border: 1px solid #d9dde3; display: block; }
+    figure.fig figcaption { font-size: .82rem; color: #5a6472; margin-top: 6px; }
+    table.grid { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    table.grid th, table.grid td { border-bottom: 1px solid #e3e6ea; padding: 6px 8px; text-align: right; }
+    table.grid th:first-child, table.grid td:first-child { text-align: left; }
+    table.grid thead th { border-bottom: 2px solid #c3c9d2; font-size: .78rem; text-transform: uppercase; letter-spacing: .03em; }
+    td.best { font-weight: 700; color: #3d7a35; }
+    .thumbs { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-top: 10px; }
+    .thumbs img { width: 100%; border: 1px solid #d9dde3; display: block; }
+    .thumbs span { font-size: .76rem; color: #5a6472; }
+  </style>
+</head>
+<body>
+  <header class="app-bar">
+    <span class="app-name">ITRI626 document classifier</span>
+    <span class="breadcrumb">Model results</span>
+  </header>
+  <div class="shell">
+    <nav class="nav-rail">
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation">Menu</button>
+      <ul>
+        <li><a href="/index.html">Overview</a></li>
+        <li><a href="/use.html">Try the classifier</a></li>
+        <li><a href="/data.html">Dataset</a></li>
+        <li><a href="/results.html">Results</a></li>
+        <li><a href="/models.html" class="active">Model results</a></li>
+        <li><a href="/comparison.html">Model comparison</a></li>
+      </ul>
+    </nav>
+    <main class="content">
+
+      <section class="card">
+        <div class="card-head">
+          <div class="page-intro">
+            <p class="eyebrow">Three families, one split</p>
+            <h1>Model results and comparison</h1>
+            <p>Every model was trained on the same 11,200 pages, selected on the same
+               2,400 validation pages, and scored once on the same 2,400 held-out pages.
+               All three runs used one Tesla T4 at batch size 32.</p>
+          </div>
+          <span id="families" class="pulse idle">Loading...</span>
+        </div>
+        <div id="headline" class="stat-strip"></div>
+      </section>
+
+      <section class="card">
+        <p class="card-title">Held-out test results</p>
+        <p class="card-body">The three comparison entries, one per architectural family.
+           Best value in each column is highlighted.</p>
+        <div id="main-table"></div>
+      </section>
+
+      <section class="card">
+        <p class="card-title">The headline chart</p>
+        <figure class="fig">
+          <img src="/figure/report/fig1_headline_scores.png" alt="Accuracy and macro-F1 by model family">
+          <figcaption>Accuracy and macro-F1 on the held-out split. The y-axis starts at
+            0.78 to make the differences readable; the full range is 0 to 1.</figcaption>
+        </figure>
+      </section>
+
+      <section class="card">
+        <p class="card-title">Per-class F1</p>
+        <p class="card-body">The aggregate score hides where the models actually differ.</p>
+        <div id="class-table"></div>
+        <figure class="fig">
+          <img src="/figure/report/fig2_per_class_f1.png" alt="Per-class F1 by model">
+          <figcaption>Hardest class first. On resume, advertisement and handwritten the
+            three models sit within about 0.03; the gap opens on the confusable
+            business documents.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="/figure/report/fig3_pretraining_gain.png" alt="Gain from pretraining per class">
+          <figcaption>What pretraining buys, class by class: invoice gains 0.106 F1,
+            advertisement only 0.012.</figcaption>
+        </figure>
+      </section>
+
+      <section class="card">
+        <p class="card-title">Accuracy against cost</p>
+        <p class="card-body">The brief asks for a recommendation on accuracy, inference
+           time and model size together.</p>
+        <figure class="fig">
+          <img src="/figure/report/fig4_accuracy_vs_cost.png" alt="Macro-F1 against inference time">
+          <figcaption>ViT-B/16 leads by 0.009 macro-F1 at 4.1x the inference time and
+            3.6x the size. ResNet50 sits at the balance point.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="/figure/report/fig6_model_cost.png" alt="Parameters, size and inference time">
+          <figcaption>Parameters, disk size and inference time per page.</figcaption>
+        </figure>
+      </section>
+
+      <section class="card">
+        <p class="card-title">Learning curves</p>
+        <figure class="fig">
+          <img src="/figure/report/fig5_learning_curves.png" alt="Validation macro-F1 and loss per epoch">
+          <figcaption>Every model overfits the training split, yet validation macro-F1
+            kept improving to the final epochs. With 11,200 training pages this points
+            at the per-class cap, not the architectures, as the binding limitation.</figcaption>
+        </figure>
+      </section>
+
+      <section class="card">
+        <p class="card-title">Each model in detail</p>
+        <p class="card-body">The three comparison entries, one per architectural family,
+           with their confusion matrices, learning curves and misclassified pages.</p>
+        <div id="models" class="family-grid"></div>
+      </section>
+
+      <section class="card">
+        <p class="card-title">Which model wins each class</p>
+        <div id="strengths"></div>
+      </section>
+
+    </main>
+  </div>
+<script>
+const $ = (id) => document.getElementById(id);
+const n4 = (v) => (v === null || v === undefined || v === "") ? "-" : Number(v).toFixed(4);
+
+function table(headers, rows, bestCols) {
+  const head = headers.map(h => `<th>${h}</th>`).join("");
+  const body = rows.map(r => "<tr>" + r.map((cell, i) =>
+      `<td class="${(bestCols && bestCols[i] === cell.raw) ? "best" : ""}">${cell.text ?? cell}</td>`
+    ).join("") + "</tr>").join("");
+  return `<table class="grid"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
+}
+
+fetch("/api/models").then(r => r.json()).then(data => {
+  const badge = $("families");
+  badge.textContent = `${data.families_complete} of ${data.families_required} families complete`;
+  badge.className = "pulse " + (data.families_complete >= 3 ? "ok" : "idle");
+
+  const main = data.models.filter(m => m.role === "comparison" && m.metrics);
+  main.sort((a, b) => Number(b.metrics.macro_f1) - Number(a.metrics.macro_f1));
+
+  // Headline strip
+  $("headline").innerHTML = main.map(m => `
+    <div class="stat">
+      <span class="stat-value">${n4(m.metrics.macro_f1)}</span>
+      <span class="stat-label">${m.label} macro-F1</span>
+    </div>`).join("") + `
+    <div class="stat"><span class="stat-value">2,400</span>
+      <span class="stat-label">held-out pages, same for all</span></div>`;
+
+  // Main table
+  const bestF1 = Math.max(...main.map(m => Number(m.metrics.macro_f1)));
+  const bestMs = Math.min(...main.filter(m => m.efficiency)
+      .map(m => Number(m.efficiency.median_ms_per_image)));
+  $("main-table").innerHTML = table(
+    ["Model", "Family", "Accuracy", "Macro-F1", "ms/page", "Parameters", "Size MB"],
+    main.map(m => {
+      const e = m.efficiency || {};
+      return [
+        m.label, m.family,
+        n4(m.metrics.accuracy),
+        { text: n4(m.metrics.macro_f1), raw: Number(m.metrics.macro_f1) === bestF1 ? Number(m.metrics.macro_f1) : null },
+        { text: e.median_ms_per_image ? Number(e.median_ms_per_image).toFixed(2) : "-",
+          raw: e.median_ms_per_image && Number(e.median_ms_per_image) === bestMs ? bestMs : null },
+        e.total_parameters ? Number(e.total_parameters).toLocaleString() : "-",
+        e.size_mb ? Number(e.size_mb).toFixed(1) : "-",
+      ];
+    }),
+    [null, null, null, bestF1, bestMs, null, null]
+  );
+
+  // Per-class table
+  const classes = {};
+  main.forEach(m => (m.per_class || []).forEach(r => {
+    classes[r.class_name] = classes[r.class_name] || {};
+    classes[r.class_name][m.name] = Number(r.f1);
+  }));
+  const order = Object.keys(classes).sort((a, b) =>
+    Math.min(...Object.values(classes[a])) - Math.min(...Object.values(classes[b])));
+  $("class-table").innerHTML = table(
+    ["Class", ...main.map(m => m.label)],
+    order.map(c => {
+      const best = Math.max(...main.map(m => classes[c][m.name] ?? -1));
+      return [c, ...main.map(m => {
+        const v = classes[c][m.name];
+        return { text: v === undefined ? "-" : v.toFixed(4), raw: v === best ? v : null };
+      })];
+    }),
+    [null, ...main.map(() => undefined)]
+  ).replace(/<td class="">(0\.\d{4})<\/td>/g, (full, v) => full);
+
+  // Mark the best cell per row
+  const rows = $("class-table").querySelectorAll("tbody tr");
+  rows.forEach(tr => {
+    const cells = [...tr.querySelectorAll("td")].slice(1);
+    const vals = cells.map(td => parseFloat(td.textContent));
+    const max = Math.max(...vals.filter(v => !isNaN(v)));
+    cells.forEach((td, i) => { if (vals[i] === max) td.classList.add("best"); });
+  });
+
+  // Model cards
+  $("models").innerHTML = data.models.map(m => {
+    const e = m.efficiency || {};
+    const isTop = m.role === "comparison" && m.metrics &&
+                  Number(m.metrics.macro_f1) === bestF1;
+    return `
+    <div class="model-card ${isTop ? "winner" : ""}">
+      <span class="role-tag">${m.role}</span>
+      <h3>${m.label}</h3>
+      <div class="family">${m.family} &middot; ${m.platform}</div>
+      <div class="score-row">
+        <div><span class="n">${m.metrics ? n4(m.metrics.macro_f1) : "-"}</span>
+             <span class="l">test macro-F1</span></div>
+        <div><span class="n">${m.metrics ? n4(m.metrics.accuracy) : "-"}</span>
+             <span class="l">accuracy</span></div>
+      </div>
+      <p class="card-body" style="font-size:.86rem">${m.summary}</p>
+      <div class="family">${m.epochs_run || "?"} epochs &middot; best epoch
+        ${m.best_epoch ?? "?"}${e.total_parameters ? " &middot; " +
+        (Number(e.total_parameters)/1e6).toFixed(1) + " M params" : ""}</div>
+      <div class="proscons">
+        <div class="pro"><div class="h">Strengths</div>
+          <ul>${m.pros.map(x => `<li>${x}</li>`).join("")}</ul></div>
+        <div class="con"><div class="h">Limitations</div>
+          <ul>${m.cons.map(x => `<li>${x}</li>`).join("")}</ul></div>
+      </div>
+      ${m.figures.length ? `<div class="thumbs">${m.figures
+          .filter(f => f.startsWith("confusion_normalised") || f.startsWith("curves"))
+          .map(f => `<div><img src="/figure/${m.name}/${f}" alt="${f}"><span>${f}</span></div>`)
+          .join("")}</div>` : ""}
+    </div>`;
+  }).join("");
+
+  // Class strengths, using the same labels as the rest of the page
+  if (data.class_strengths && data.class_strengths.length) {
+    const naming = {};
+    data.models.forEach(m => { naming[m.name] = m.label; });
+    const named = (k) => naming[k] || k || "-";
+    $("strengths").innerHTML = table(
+      ["Class", "Best model", "F1", "Runner-up", "F1", "Margin"],
+      data.class_strengths.map(r => [
+        r.class_name, named(r.best_model), n4(r.best_f1),
+        named(r.runner_up), r.runner_up_f1 ? n4(r.runner_up_f1) : "-",
+        r.margin ? Number(r.margin).toFixed(4) : "-",
+      ])
+    );
+  } else {
+    $("strengths").innerHTML = "<p class='muted'>Run run_compare.py to build this table.</p>";
+  }
+}).catch(err => {
+  $("families").textContent = "Failed to load";
+  $("headline").innerHTML = `<p class="muted">${err}</p>`;
+});
+</script>
+</body>
+</html>

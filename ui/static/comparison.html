@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Model comparison - ITRI626 document classifier</title>
+  <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+  <header class="app-bar">
+    <span class="app-name">ITRI626 document classifier</span>
+    <span class="breadcrumb">Model comparison</span>
+  </header>
+  <div class="shell">
+    <nav class="nav-rail">
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation">Menu</button>
+      <ul>
+        <li><a href="/index.html">Overview</a></li>
+        <li><a href="/use.html">Try the classifier</a></li>
+        <li><a href="/data.html">Dataset</a></li>
+        <li><a href="/results.html">Results</a></li>
+        <li><a href="/models.html">Model results</a></li>
+        <li><a href="/comparison.html" class="active">Model comparison</a></li>
+      </ul>
+    </nav>
+    <main class="content">
+<section class="card comparison-hero">
+<div class="card-head"><div class="page-intro"><p class="eyebrow">Experiment review</p>
+<h1>Three model families compared</h1>
+<p>A convolutional network trained from scratch, a pretrained convolutional network, and a pretrained transformer, on one fixed, leakage-checked split.</p></div>
+<span id="compare-status" class="pulse idle">Loading...</span></div>
+<div id="compare-summary" class="stat-strip"></div>
+<div id="compare-intro"></div>
+<div id="compare-caveat"></div>
+<div id="page-banner"></div>
+</section>
+
+<section class="card"><p class="card-title">Held-out test comparison</p>
+<p class="card-body">The same 2,400 pages for every model, 300 per class. Each checkpoint was selected on validation macro-F1 before the test split was read.</p>
+<div id="test-table"></div></section>
+
+<section class="card"><p class="card-title">How each run was configured</p>
+<div id="changes-table"></div></section>
+
+<section class="card"><p class="card-title">Strengths and limitations of each</p>
+<div id="improvement-notes"></div></section>
+
+<section class="card"><p class="card-title">Which model wins each class</p>
+<p class="card-body">An aggregate score says which model is best overall; this says what each is best at.</p>
+<div id="class-winners"></div></section>
+
+<section class="card"><p class="card-title">Figures for each model</p>
+<p class="card-body">Confusion matrices, learning curves and misclassified examples for each of the three models are on the <a href="/models.html">Model results</a> page.</p></section>
+</main>
+  </div>
+  <script src="/js/common.js"></script>
+  <script src="/js/charts.js"></script>
+<script src="/js/comparison.js"></script>
+</body>
+</html>
